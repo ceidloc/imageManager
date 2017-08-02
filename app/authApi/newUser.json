@@ -1,0 +1,11 @@
+{
+	"type":"insert",
+	"args":{
+	   "table":"Profile",
+	      "objects":[{
+	      	  "user_id" : 4,
+	      	  "username" : "ceid",
+                  "email" : "ceid@gmail.com"
+	      }]
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"type":"insert",
+	"args":{
+	   "table":"article_table",
+	   "objects":[
+		{
+			"user_id": 5,
+			"head": "Espresso",
+			"body": "Espresso is a type of coffee",
+			"category": "cafe_menu"
+			
+		}
+	   ],
+	   "returning": ["article_id"]
+	}
+}
+
+
+{
+    "affected_rows": 1,
+    "returning": [
+        {
+            "article_id": 1
+        }
+    ]
+}

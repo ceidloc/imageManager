@@ -1,5 +1,6 @@
 const express = require('express');
 const validator = require('validator');
+const passport = require('passport');
 
 const router = new express.Router();
 
@@ -74,7 +75,7 @@ function validateLoginForm(payload) {
   };
 }
 
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({
@@ -84,10 +85,23 @@ router.post('/signup', (req, res) => {
     });
   }
 
-  return res.status(200).end();
+
+  return passport.authenticate('local-signup', (err) => {
+    if (err) {
+      return res.status(400).json({
+        success: false,
+        message: 'Could not process the form.'
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'You have successfully signed up! Now you should be able to log in.'
+    });
+  })(req, res, next);
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   const validationResult = validateLoginForm(req.body);
   if (!validationResult.success) {
     return res.status(400).json({
@@ -97,8 +111,54 @@ router.post('/login', (req, res) => {
     });
   }
 
-  return res.status(200).end();
+
+  return passport.authenticate('local-login', (err, token, userData) => {
+    if (err) {
+      if (err.name === 'IncorrectCredentialsError') {
+        return res.status(400).json({
+          success: false,
+          message: err.message
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: 'Could not process the form.'
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: 'You have successfully logged in!',
+      token,
+      user: userData
+    });
+  })(req, res, next);
 });
 
-
+/////////////////
+//// Log out ////
+/////////////////
+/*
+router.post('/logout', (req, res) => {
+  console.log(req.headers);
+  app.get('/logout', function(req, res) {
+  var url = 'http://auth.vcap.me/user/logout';
+  var options = {
+    method: 'POST',
+    headers
+  };
+    
+  fetch(url, options)
+    .then(function(response) {
+      console.log("> Logging out...");
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(">\n> Logged Out.\n");
+      res.next();
+    });
+  });
+});
+*/
 module.exports = router;

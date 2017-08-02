@@ -1,0 +1,23 @@
+{
+	"type":"insert",
+	"args":{
+	   "table":"points_on_comment_table",
+	   "objects":[
+		{
+			"user_id": 5,
+			"comment_id":1,
+			"points": true
+		}
+	   ],
+	   "returning": ["points"]
+	}
+}
+
+{
+    "affected_rows": 1,
+    "returning": [
+        {
+            "points": true
+        }
+    ]
+}

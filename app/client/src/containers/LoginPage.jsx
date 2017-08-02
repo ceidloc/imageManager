@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
 
 
@@ -7,14 +8,23 @@ class LoginPage extends React.Component {
   /**
    * Class constructor.
    */
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+
+    const storedMessage = localStorage.getItem('successMessage');
+    let successMessage = '';
+
+    if (storedMessage) {
+      successMessage = storedMessage;
+      localStorage.removeItem('successMessage');
+    }
 
     // set the initial component state
     this.state = {
       errors: {},
+      successMessage,
       user: {
-        email: '',
+        name: '',
         password: ''
       }
     };
@@ -33,9 +43,9 @@ class LoginPage extends React.Component {
     event.preventDefault();
 
     // create a string for an HTTP body message
-    const email = encodeURIComponent(this.state.user.email);
+    const name = encodeURIComponent(this.state.user.name);
     const password = encodeURIComponent(this.state.user.password);
-    const formData = `email=${email}&password=${password}`;
+    const formData = `email=${name}&password=${password}`;
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
@@ -50,8 +60,13 @@ class LoginPage extends React.Component {
         this.setState({
           errors: {}
         });
+        //console.log("loginpage " + xhr.response.token);
+        // save the token
+        Auth.authenticateUser(xhr.response.token);
 
-        console.log('The form is valid');
+
+        // change the current URL to /
+        this.context.router.replace('/');
       } else {
         // failure
 
@@ -65,6 +80,7 @@ class LoginPage extends React.Component {
       }
     });
     xhr.send(formData);
+
   }
 
   /**
@@ -91,11 +107,16 @@ class LoginPage extends React.Component {
         onSubmit={this.processForm}
         onChange={this.changeUser}
         errors={this.state.errors}
+        successMessage={this.state.successMessage}
         user={this.state.user}
       />
     );
   }
 
 }
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 export default LoginPage;

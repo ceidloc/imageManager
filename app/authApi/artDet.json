@@ -1,0 +1,8 @@
+SELECT a.*, u.username as author, apu.no_of_upvotes, apd.no_of_downvotes , 
+        ac.no_of_comments
+    FROM "article_table" as a JOIN "user_table" as u
+        ON a.user_id = u.user_id,
+            "no_of_comments_in_article" as ac,"no_of_upvotes_on_article" as apu, 
+            "no_of_downvotes_on_article" as apd
+    WHERE a.article_id = ac.article_id and a.article_id = apu.article_id 
+        and a.article_id = apd.article_id

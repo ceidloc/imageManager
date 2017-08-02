@@ -1,0 +1,23 @@
+{
+	"type":"insert",
+	"args":{
+	   "table":"points_on_article_table",
+	   "objects":[
+		{
+			"user_id": 5,
+			"article_id":1,
+			"points": true
+		}
+	   ],
+	   "returning": ["points"]
+	}
+}	
+
+{
+    "affected_rows": 1,
+    "returning": [
+        {
+            "points": true
+        }
+    ]
+}
