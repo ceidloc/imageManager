@@ -9,7 +9,7 @@ const SignUpForm = ({
   onSubmit,
   onChange,
   errors,
-  user,
+  user
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>

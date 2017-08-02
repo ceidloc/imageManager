@@ -1,10 +1,10 @@
-
 import Base from './components/Base.jsx';
 import HomePage from './components/HomePage.jsx';
 import DashboardPage from './containers/DashboardPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
 import LogoutPage from './containers/LogoutPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
+import GalleryPage from './containers/GalleryPage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -33,6 +33,11 @@ const routes = {
       path: '/signup',
       component: SignUpPage
     },
+
+      {
+          path: '/gallery/:user_id',
+          component: GalleryPage
+      },
 
     {
       path: '/logout',

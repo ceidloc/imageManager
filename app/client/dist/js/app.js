@@ -35241,6 +35241,10 @@
 
 	var _SignUpPage2 = _interopRequireDefault(_SignUpPage);
 
+	var _GalleryPage = __webpack_require__(475);
+
+	var _GalleryPage2 = _interopRequireDefault(_GalleryPage);
+
 	var _Auth = __webpack_require__(398);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -35265,6 +35269,9 @@
 	  }, {
 	    path: '/signup',
 	    component: _SignUpPage2.default
+	  }, {
+	    path: '/gallery/:user_id',
+	    component: _GalleryPage2.default
 	  }, {
 	    path: '/logout',
 	    onEnter: function onEnter(nextState, replace) {
@@ -41148,7 +41155,7 @@
 	    var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
 	    _this.state = {
-	      usersData: []
+	      data: []
 	    };
 	    return _this;
 	  }
@@ -41174,7 +41181,7 @@
 	      xhr.addEventListener('load', function () {
 	        if (xhr.status === 200) {
 	          _this2.setState({
-	            usersData: xhr.response
+	            data: xhr.response
 	          });
 	        }
 	      });
@@ -41188,7 +41195,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Dashboard2.default, { usersData: this.state.usersData });
+	      return _react2.default.createElement(_Dashboard2.default, { data: this.state.data });
 	    }
 	  }]);
 
@@ -41213,6 +41220,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(339);
+
 	var _Card = __webpack_require__(400);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -41235,7 +41244,7 @@
 	    _createClass(Dashboard, [{
 	        key: 'render',
 	        value: function render() {
-	            var data = this.props.usersData.map(function (data) {
+	            var data = this.props.data.map(function (data) {
 	                return _react2.default.createElement(
 	                    _Card.Card,
 	                    { className: 'userRow', key: data.user_id },
@@ -41243,8 +41252,12 @@
 	                    _react2.default.createElement(
 	                        _Card.CardText,
 	                        { style: { fontSize: '16px', color: 'green' } },
-	                        'Images:',
-	                        data.no_of_images
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/gallery/' + data.user_id },
+	                            'Images:',
+	                            data.no_of_images
+	                        )
 	                    )
 	                );
 	            });
@@ -43892,6 +43905,168 @@
 	};
 
 	exports.default = SignUpForm;
+
+/***/ }),
+/* 475 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Gallery = __webpack_require__(476);
+
+	var _Gallery2 = _interopRequireDefault(_Gallery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GalleryPage = function (_React$Component) {
+	  _inherits(GalleryPage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function GalleryPage(props) {
+	    _classCallCheck(this, GalleryPage);
+
+	    var _this = _possibleConstructorReturn(this, (GalleryPage.__proto__ || Object.getPrototypeOf(GalleryPage)).call(this, props));
+
+	    _this.state = {
+	      data: []
+	    };
+	    return _this;
+	  }
+
+	  /**
+	   * This method will be executed after initial rendering.
+	   */
+
+
+	  _createClass(GalleryPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const user_id = encodeURIComponent("38");
+	      var user_id = encodeURIComponent(this.props.params.user_id);
+	      var formData = 'user_id=' + user_id;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/gallery');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          _this2.setState({
+	            data: xhr.response
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_Gallery2.default, { data: this.state.data });
+	    }
+	  }]);
+
+	  return GalleryPage;
+	}(_react2.default.Component);
+
+	exports.default = GalleryPage;
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Card = __webpack_require__(400);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Gallery = function (_React$Component) {
+	    _inherits(Gallery, _React$Component);
+
+	    function Gallery() {
+	        _classCallCheck(this, Gallery);
+
+	        return _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).apply(this, arguments));
+	    }
+
+	    _createClass(Gallery, [{
+	        key: 'render',
+	        value: function render() {
+	            var data = this.props.data.map(function (data) {
+	                return _react2.default.createElement(
+	                    _Card.Card,
+	                    { className: 'imageRow', key: data.image_id },
+	                    _react2.default.createElement(_Card.CardTitle, { title: data.url }),
+	                    _react2.default.createElement(
+	                        _Card.CardText,
+	                        { style: { fontSize: '16px', color: 'yellow' } },
+	                        'Caption:',
+	                        data.caption
+	                    )
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                data
+	            );
+	        }
+	    }]);
+
+	    return Gallery;
+	}(_react2.default.Component);
+
+	exports.default = Gallery;
 
 /***/ })
 /******/ ]);

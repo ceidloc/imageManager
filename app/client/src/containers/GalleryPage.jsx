@@ -1,9 +1,9 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import Dashboard from '../components/Dashboard.jsx';
+import Gallery from '../components/Gallery.jsx';
 
 
-class DashboardPage extends React.Component {
+class GalleryPage extends React.Component {
 
   /**
    * Class constructor.
@@ -21,10 +21,13 @@ class DashboardPage extends React.Component {
    */
   componentDidMount() {
       var token = Auth.getToken();
-    token = token.split(' ')[0];
+      token = token.split(' ')[0];
+      //const user_id = encodeURIComponent("38");
+      const user_id = encodeURIComponent(this.props.params.user_id);
+      const formData = `user_id=${user_id}`;
     
     const xhr = new XMLHttpRequest();
-    xhr.open('get', '/api/dashboard');
+    xhr.open('post', '/api/gallery');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.responseType = 'json';
@@ -35,16 +38,17 @@ class DashboardPage extends React.Component {
         });
       }
     });
-    xhr.send();
+//      console.error(formData);
+    xhr.send(formData);
   }
 
   /**
    * Render the component.
    */
   render() {
-    return (<Dashboard data={this.state.data} />);
+    return (<Gallery data={this.state.data} />);
   }
 
 }
 
-export default DashboardPage;
+export default GalleryPage;
