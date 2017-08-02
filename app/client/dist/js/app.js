@@ -41148,7 +41148,7 @@
 	    var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
 
 	    _this.state = {
-	      secretData: ''
+	      usersData: []
 	    };
 	    return _this;
 	  }
@@ -41163,16 +41163,18 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('get', '/api/dashboard');
 	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      // set the authorization HTTP header
-	      xhr.setRequestHeader('Authorization', 'bearer ' + _Auth2.default.getToken());
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 	      xhr.responseType = 'json';
 	      xhr.addEventListener('load', function () {
 	        if (xhr.status === 200) {
 	          _this2.setState({
-	            secretData: xhr.response.message
+	            usersData: xhr.response
 	          });
 	        }
 	      });
@@ -41186,7 +41188,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Dashboard2.default, { secretData: this.state.secretData });
+	      return _react2.default.createElement(_Dashboard2.default, { usersData: this.state.usersData });
 	    }
 	  }]);
 
@@ -41202,8 +41204,10 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -41213,26 +41217,48 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Dashboard = function Dashboard(_ref) {
-	  var secretData = _ref.secretData;
-	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(_Card.CardTitle, {
-	      title: 'Dashboard',
-	      subtitle: 'You should get access to this page only after authentication.'
-	    }),
-	    secretData && _react2.default.createElement(
-	      _Card.CardText,
-	      { style: { fontSize: '16px', color: 'green' } },
-	      secretData
-	    )
-	  );
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	Dashboard.propTypes = {
-	  secretData: _react.PropTypes.string.isRequired
-	};
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Dashboard = function (_React$Component) {
+	    _inherits(Dashboard, _React$Component);
+
+	    function Dashboard() {
+	        _classCallCheck(this, Dashboard);
+
+	        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+	    }
+
+	    _createClass(Dashboard, [{
+	        key: 'render',
+	        value: function render() {
+	            var data = this.props.usersData.map(function (data) {
+	                return _react2.default.createElement(
+	                    _Card.Card,
+	                    { className: 'userRow', key: data.user_id },
+	                    _react2.default.createElement(_Card.CardTitle, { title: data.name }),
+	                    _react2.default.createElement(
+	                        _Card.CardText,
+	                        { style: { fontSize: '16px', color: 'green' } },
+	                        'Images:',
+	                        data.no_of_images
+	                    )
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                data
+	            );
+	        }
+	    }]);
+
+	    return Dashboard;
+	}(_react2.default.Component);
 
 	exports.default = Dashboard;
 
@@ -43560,7 +43586,7 @@
 
 	      // create an AJAX request
 	      var xhr = new XMLHttpRequest();
-	      xhr.open('POST', 'http://auth.nonstop61.hasura-app.io/user/logout');
+	      xhr.open('POST', 'http://auth.c101.hasura.me/user/logout');
 	      xhr.setRequestHeader('Content-type', 'application/json');
 	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 	      xhr.addEventListener('load', function () {

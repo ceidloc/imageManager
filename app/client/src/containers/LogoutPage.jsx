@@ -26,7 +26,7 @@ class LogoutPage extends React.Component {
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://auth.nonstop61.hasura-app.io/user/logout');
+    xhr.open('POST', 'http://auth.c101.hasura.me/user/logout');
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.setRequestHeader('Authorization', `Bearer ${token}`);
     xhr.addEventListener('load', () => {

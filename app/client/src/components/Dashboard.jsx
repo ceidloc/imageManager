@@ -2,19 +2,23 @@ import React, { PropTypes } from 'react';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 
-const Dashboard = ({ secretData }) => (
-  <Card className="container">
-    <CardTitle
-      title="Dashboard"
-      subtitle="You should get access to this page only after authentication."
-    />
+class Dashboard extends React.Component {        
+    
+    render() {
+        var data = this.props.usersData.map(function(data) {
+            return (<Card className="userRow" key={data.user_id}>
+                     <CardTitle title= {data.name}/>
+              
+                <CardText style={{ fontSize: '16px', color: 'green' }}>Images:{data.no_of_images}</CardText>
+                    </Card> );
+        });
 
-    {secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{secretData}</CardText>}
-  </Card>
-);
-
-Dashboard.propTypes = {
-  secretData: PropTypes.string.isRequired
-};
+        return (
+	    <Card className="container">	      
+	      {data}	      
+	    </Card>
+	);
+    }
+}
 
 export default Dashboard;
