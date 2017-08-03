@@ -35245,6 +35245,10 @@
 
 	var _GalleryPage2 = _interopRequireDefault(_GalleryPage);
 
+	var _AddImagePage = __webpack_require__(477);
+
+	var _AddImagePage2 = _interopRequireDefault(_AddImagePage);
+
 	var _Auth = __webpack_require__(398);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -35272,6 +35276,9 @@
 	  }, {
 	    path: '/gallery/:user_id',
 	    component: _GalleryPage2.default
+	  }, {
+	    path: '/addimage/:user_id',
+	    component: _AddImagePage2.default
 	  }, {
 	    path: '/logout',
 	    onEnter: function onEnter(nextState, replace) {
@@ -43994,7 +44001,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Gallery2.default, { data: this.state.data });
+	      return _react2.default.createElement(_Gallery2.default, { data: this.state.data, user_id: this.props.params.user_id });
 	    }
 	  }]);
 
@@ -44020,6 +44027,12 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	var _Card = __webpack_require__(400);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _reactRouter = __webpack_require__(339);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44055,9 +44068,24 @@
 	                );
 	            });
 
+	            var token = _Auth2.default.getToken();
+	            var hasura_id = token.split(' ')[1];
 	            return _react2.default.createElement(
 	                _Card.Card,
 	                { className: 'container' },
+	                _Auth2.default.isUserAuthenticated() && this.props.user_id === hasura_id ? _react2.default.createElement(
+	                    'div',
+	                    { className: 'addButton' },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/addimage/' + hasura_id },
+	                        'Add'
+	                    )
+	                ) : _react2.default.createElement(
+	                    'div',
+	                    { className: 'addButton' },
+	                    'not your gallery'
+	                ),
 	                data
 	            );
 	        }
@@ -44067,6 +44095,259 @@
 	}(_react2.default.Component);
 
 	exports.default = Gallery;
+
+/***/ }),
+/* 477 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _AddImage = __webpack_require__(478);
+
+	var _AddImage2 = _interopRequireDefault(_AddImage);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AddImagePage = function (_React$Component) {
+	  _inherits(AddImagePage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function AddImagePage(props, context) {
+	    _classCallCheck(this, AddImagePage);
+
+	    // set the initial component state
+	    var _this = _possibleConstructorReturn(this, (AddImagePage.__proto__ || Object.getPrototypeOf(AddImagePage)).call(this, props, context));
+
+	    _this.state = {
+	      errors: {},
+	      image: {
+	        url: '',
+	        caption: '',
+	        description: '',
+	        user_id: _this.props.params.user_id
+	      }
+	    };
+
+	    _this.processForm = _this.processForm.bind(_this);
+	    _this.changeImage = _this.changeImage.bind(_this);
+	    return _this;
+	  }
+
+	  /**
+	   * Process the form.
+	   *
+	   * @param {object} event - the JavaScript event object
+	   */
+
+
+	  _createClass(AddImagePage, [{
+	    key: 'processForm',
+	    value: function processForm(event) {
+	      var _this2 = this;
+
+	      // prevent default action. in this case, action is the form submission event
+	      event.preventDefault();
+
+	      // create a string for an HTTP body message
+	      var url = encodeURIComponent(this.state.image.url);
+	      var caption = encodeURIComponent(this.state.image.caption);
+	      var description = encodeURIComponent(this.state.image.description);
+	      var user_id = encodeURIComponent(this.state.image.user_id);
+	      var formData = 'url=' + url + '&caption=' + caption + '&description=' + description + '&user_id=' + user_id;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+
+	      // create an AJAX request
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/addimage');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          // success
+
+	          // change the component-container state
+	          _this2.setState({
+	            errors: {}
+	          });
+
+	          // set a message
+
+	          // make a redirect
+	          _this2.context.router.replace('/gallery/' + _this2.state.image.user_id);
+	        } else {
+	          // failure
+
+	          var errors = xhr.response.errors ? xhr.response.errors : {};
+	          errors.summary = xhr.response.message;
+
+	          _this2.setState({
+	            errors: errors
+	          });
+	        }
+	      });
+	      xhr.send(formData);
+	    }
+	  }, {
+	    key: 'changeImage',
+	    value: function changeImage(event) {
+	      var field = event.target.name;
+	      var image = this.state.image;
+	      image[field] = event.target.value;
+
+	      this.setState({
+	        image: image
+	      });
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_AddImage2.default, {
+	        onSubmit: this.processForm,
+	        onChange: this.changeImage,
+	        errors: this.state.errors,
+	        image: this.state.image
+	      });
+	    }
+	  }]);
+
+	  return AddImagePage;
+	}(_react2.default.Component);
+
+	AddImagePage.contextTypes = {
+	  router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = AddImagePage;
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _TextField = __webpack_require__(463);
+
+	var _TextField2 = _interopRequireDefault(_TextField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AddImage = function AddImage(_ref) {
+	  var onSubmit = _ref.onSubmit,
+	      onChange = _ref.onChange,
+	      errors = _ref.errors,
+	      image = _ref.image;
+	  return _react2.default.createElement(
+	    _Card.Card,
+	    { className: 'container' },
+	    _react2.default.createElement(
+	      'form',
+	      { action: '/', onSubmit: onSubmit },
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'card-heading' },
+	        'Add Image'
+	      ),
+	      errors.summary && _react2.default.createElement(
+	        'p',
+	        { className: 'error-message' },
+	        errors.summary
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'ImageUrl',
+	          name: 'url',
+	          errorText: errors.url,
+	          onChange: onChange,
+	          value: image.url
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Caption',
+	          name: 'caption',
+	          errorText: errors.email,
+	          onChange: onChange,
+	          value: image.caption
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Description',
+	          name: 'description',
+	          onChange: onChange,
+	          errorText: errors.description,
+	          value: image.description
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'button-line' },
+	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Create New Image', primary: true })
+	      )
+	    )
+	  );
+	};
+
+	AddImage.propTypes = {
+	  onSubmit: _react.PropTypes.func.isRequired,
+	  onChange: _react.PropTypes.func.isRequired,
+	  errors: _react.PropTypes.object.isRequired,
+	  image: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = AddImage;
 
 /***/ })
 /******/ ]);

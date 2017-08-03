@@ -5,6 +5,7 @@ import LoginPage from './containers/LoginPage.jsx';
 import LogoutPage from './containers/LogoutPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import GalleryPage from './containers/GalleryPage.jsx';
+import AddImagePage from './containers/AddImagePage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -37,6 +38,10 @@ const routes = {
       {
           path: '/gallery/:user_id',
           component: GalleryPage
+      },
+      {
+          path: '/addimage/:user_id',
+          component: AddImagePage
       },
 
     {
