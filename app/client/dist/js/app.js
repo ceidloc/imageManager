@@ -35249,6 +35249,10 @@
 
 	var _AddImagePage2 = _interopRequireDefault(_AddImagePage);
 
+	var _ViewImagePage = __webpack_require__(479);
+
+	var _ViewImagePage2 = _interopRequireDefault(_ViewImagePage);
+
 	var _Auth = __webpack_require__(398);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -35279,6 +35283,9 @@
 	  }, {
 	    path: '/addimage/:user_id',
 	    component: _AddImagePage2.default
+	  }, {
+	    path: '/viewimage/:image_id',
+	    component: _ViewImagePage2.default
 	  }, {
 	    path: '/logout',
 	    onEnter: function onEnter(nextState, replace) {
@@ -44058,7 +44065,11 @@
 	                return _react2.default.createElement(
 	                    _Card.Card,
 	                    { className: 'imageRow', key: data.image_id },
-	                    _react2.default.createElement(_Card.CardTitle, { title: data.url }),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/viewimage/' + data.image_id },
+	                        _react2.default.createElement(_Card.CardTitle, { title: data.url })
+	                    ),
 	                    _react2.default.createElement(
 	                        _Card.CardText,
 	                        { style: { fontSize: '16px', color: 'yellow' } },
@@ -44081,11 +44092,7 @@
 	                        { to: '/addimage/' + hasura_id },
 	                        'Add'
 	                    )
-	                ) : _react2.default.createElement(
-	                    'div',
-	                    { className: 'addButton' },
-	                    'not your gallery'
-	                ),
+	                ) : _react2.default.createElement('div', { className: 'addButton' }),
 	                data
 	            );
 	        }
@@ -44348,6 +44355,182 @@
 	};
 
 	exports.default = AddImage;
+
+/***/ }),
+/* 479 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _ViewImage = __webpack_require__(480);
+
+	var _ViewImage2 = _interopRequireDefault(_ViewImage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewImagePage = function (_React$Component) {
+	  _inherits(ViewImagePage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function ViewImagePage(props) {
+	    _classCallCheck(this, ViewImagePage);
+
+	    var _this = _possibleConstructorReturn(this, (ViewImagePage.__proto__ || Object.getPrototypeOf(ViewImagePage)).call(this, props));
+
+	    _this.state = {
+	      data: []
+	    };
+	    return _this;
+	  }
+
+	  /**
+	   * This method will be executed after initial rendering.
+	   */
+
+
+	  _createClass(ViewImagePage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const image_id = encodeURIComponent("38");
+	      var image_id = encodeURIComponent(this.props.params.image_id);
+	      var formData = 'image_id=' + image_id;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/viewimage');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          _this2.setState({
+	            data: xhr.response
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id });
+	    }
+	  }]);
+
+	  return ViewImagePage;
+	}(_react2.default.Component);
+
+	exports.default = ViewImagePage;
+
+/***/ }),
+/* 480 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Card = __webpack_require__(400);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _reactRouter = __webpack_require__(339);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewImage = function (_React$Component) {
+	    _inherits(ViewImage, _React$Component);
+
+	    function ViewImage() {
+	        _classCallCheck(this, ViewImage);
+
+	        return _possibleConstructorReturn(this, (ViewImage.__proto__ || Object.getPrototypeOf(ViewImage)).apply(this, arguments));
+	    }
+
+	    _createClass(ViewImage, [{
+	        key: 'render',
+	        value: function render() {
+	            console.error(this.props.data);
+	            var token = _Auth2.default.getToken();
+	            var hasura_id = token.split(' ')[1];
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                _react2.default.createElement(_Card.CardTitle, { title: this.props.data.caption }),
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    { style: { fontSize: '20px', color: 'black' } },
+	                    this.props.data.url
+	                ),
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    { style: { fontSize: '16px', color: 'green' } },
+	                    this.props.data.description
+	                ),
+	                _Auth2.default.isUserAuthenticated() && this.props.data.user_id == hasura_id ? _react2.default.createElement(
+	                    'div',
+	                    { className: 'addButton' },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/' + hasura_id },
+	                        'edit,delete'
+	                    )
+	                ) : _react2.default.createElement('div', { className: 'addButton' })
+	            );
+	        }
+	    }]);
+
+	    return ViewImage;
+	}(_react2.default.Component);
+
+	exports.default = ViewImage;
 
 /***/ })
 /******/ ]);

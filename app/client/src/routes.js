@@ -6,6 +6,7 @@ import LogoutPage from './containers/LogoutPage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import GalleryPage from './containers/GalleryPage.jsx';
 import AddImagePage from './containers/AddImagePage.jsx';
+import ViewImagePage from './containers/ViewImagePage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -42,6 +43,10 @@ const routes = {
       {
           path: '/addimage/:user_id',
           component: AddImagePage
+      },
+      {
+          path: '/viewimage/:image_id',
+          component: ViewImagePage
       },
 
     {

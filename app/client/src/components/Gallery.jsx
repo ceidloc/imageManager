@@ -8,11 +8,14 @@ class Gallery extends React.Component {
     
     render() {
         var data = this.props.data.map(function(data) {
-            return (<Card className="imageRow" key={data.image_id}>
-                     <CardTitle title= {data.url}/>
-              
-                <CardText style={{ fontSize: '16px', color: 'yellow' }}>Caption:{data.caption}</CardText>
-                    </Card> );
+            return (
+                <Card className="imageRow" key={data.image_id}>
+                  <Link to = {'/viewimage/' + data.image_id} >
+                    <CardTitle title= {data.url}/>
+                  </Link>
+                  <CardText style={{ fontSize: '16px', color: 'yellow' }}>Caption:{data.caption}</CardText>
+                </Card>
+            );
         });
 
         var token = Auth.getToken();
@@ -25,8 +28,7 @@ class Gallery extends React.Component {
                                  </div>
                   )
                :(
-                   <div className="addButton">
-                     not your gallery
+                   <div className="addButton">               
                    </div>)
               }
                 
