@@ -5,7 +5,7 @@ const app = express();
 const router = new express.Router();
 var headers = {'Content-Type': 'application/json'};
 var name = '';
-
+var isAnImageUrl = require('is-an-image-url');
 
 router.get('/dashboard', (req, res) => {
 	
@@ -116,7 +116,22 @@ router.post('/addimage', (req, res) => {
     var url = req.body.url;
     var caption = req.body.caption;
     var description = req.body.description;
-    
+
+    //checking if entered url is valid
+    isAnImageUrl(url, function(isAnImageResult){
+        console.error("in url validator");
+        if(!isAnImageResult){
+            console.error("is not an image");
+            const errors = {};
+            errors.url = "incorrect image url";
+            return res.status(400).json({
+                success: false,
+                message: 'Could not process the form.',
+                errors
+            });
+            
+        }
+    });
     //var user_id =38 ;
     //console.error(req.body);
     
@@ -234,7 +249,22 @@ router.post('/editimage', (req, res) => {
     var url = req.body.url;
     var caption = req.body.caption;
     var description = req.body.description;
-    
+
+    //checking if entered url is valid
+    isAnImageUrl(url, function(isAnImageResult){
+        console.error("in url validator");
+        if(!isAnImageResult){
+            console.error("is not an image");
+            const errors = {};
+            errors.url = "incorrect image url";
+            return res.status(400).json({
+                success: false,
+                message: 'Could not process the form.',
+                errors
+            });
+            
+        }
+    });
     //var user_id =38 ;
     //console.error(req.body);
     

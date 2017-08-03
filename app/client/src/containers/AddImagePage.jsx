@@ -40,7 +40,7 @@ class AddImagePage extends React.Component {
       const description = encodeURIComponent(this.state.image.description);
       const user_id = encodeURIComponent(this.state.image.user_id);
       const formData = `url=${url}&caption=${caption}&description=${description}&user_id=${user_id}`;
-
+      
       var token = Auth.getToken();
       token = token.split(' ')[0];
 
