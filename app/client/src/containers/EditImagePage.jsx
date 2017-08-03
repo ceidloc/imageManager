@@ -17,7 +17,8 @@ class EditImagePage extends React.Component {
           url: '',
           caption: '',
           description: '',
-          image_id: this.props.params.image_id
+          image_id: this.props.params.image_id,
+          user_id :''
       }
     };
 
@@ -51,6 +52,7 @@ class EditImagePage extends React.Component {
             image.url = data.url;
             image.caption = data.caption;
             image.description = data.description;
+            image.user_id = data.user_id;
         this.setState({
             image: image
         });
@@ -97,12 +99,9 @@ class EditImagePage extends React.Component {
         });
 
           // set a message
-          console.error("in edit image page");
-          console.error(xhr.response);
-          var user_id = xhr.response;
-          
-        // make a redirect
-          this.context.router.replace('/gallery/'+user_id);
+          // make a redirect
+          console.error("fuewifn: "+this.state.image.user_id );
+          this.context.router.replace('/gallery/'+this.state.image.user_id);
       } else {
         // failure
 

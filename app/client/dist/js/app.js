@@ -44589,7 +44589,8 @@
 	        url: '',
 	        caption: '',
 	        description: '',
-	        image_id: _this.props.params.image_id
+	        image_id: _this.props.params.image_id,
+	        user_id: ''
 	      }
 	    };
 
@@ -44627,6 +44628,7 @@
 	          image.url = data.url;
 	          image.caption = data.caption;
 	          image.description = data.description;
+	          image.user_id = data.user_id;
 	          _this2.setState({
 	            image: image
 	          });
@@ -44676,12 +44678,9 @@
 	          });
 
 	          // set a message
-	          console.error("in edit image page");
-	          console.error(xhr.response);
-	          var user_id = xhr.response;
-
 	          // make a redirect
-	          _this3.context.router.replace('/gallery/' + user_id);
+	          console.error("fuewifn: " + _this3.state.image.user_id);
+	          _this3.context.router.replace('/gallery/' + _this3.state.image.user_id);
 	        } else {
 	          // failure
 

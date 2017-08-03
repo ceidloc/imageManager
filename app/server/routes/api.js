@@ -271,14 +271,14 @@ router.post('/editimage', (req, res) => {
                             console.error(data.returning[0].user_id);
                             var user_id = data.returning[0].user_id;
                             console.error(user_id);
-	            	    res.status(200).send(user_id);
+	            	    res.sendStatus(200).send(user_id);
 	                },
 	                (e) => {
 	                    res.json('Error in fetching current schema: ' + err.toString());
 	                })
 	            .catch((e) => {
                         console.error(e);
-                        res.status(200).send(e);
+                        res.sendStatus(200).send();
 	            });
 	    },
 	    (e) => {
