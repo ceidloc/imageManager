@@ -223,4 +223,72 @@ router.post('/viewimage', (req, res) => {
 	});
 });
 
+router.post('/editimage', (req, res) => {
+
+    var image_id = parseInt(req.body.image_id);
+    headers.Authorization = req.headers.authorization;
+    //headers.Authorization = req.headers.authorization;
+    //headers['X-Hasura-Role'] = req.headers['x-hasura-role'];
+    //headers['X-Hasura-Role'] = "user";
+    //headers['X-Hasura-User-Id'] = user_id;
+    var url = req.body.url;
+    var caption = req.body.caption;
+    var description = req.body.description;
+    
+    //var user_id =38 ;
+    //console.error(req.body);
+    
+    var schemaFetchUrl = 'http://data.c101.hasura.me/v1/query';
+    var options = {
+	method: 'POST',
+        headers,
+	body: JSON.stringify({
+	    type: 'update',     
+	    args: {                
+                "table":"Image",
+		"$set": {
+                    "url":url,
+                    "caption":caption,
+                    "description":description
+                },
+		"where": {
+		    "image_id": image_id
+		},
+                "returning": ["user_id"]
+	    }	        	    
+        })
+    };
+
+    fetch(schemaFetchUrl, options)
+	.then(
+	    (response) => {
+	        response.text()
+	            .then(
+	                (data) => {
+                            data=JSON.parse(data);
+                            console.error("in edit image");
+                            console.error(data);
+                            console.error(data.returning[0].user_id);
+                            var user_id = data.returning[0].user_id;
+                            console.error(user_id);
+	            	    res.status(200).send(user_id);
+	                },
+	                (e) => {
+	                    res.json('Error in fetching current schema: ' + err.toString());
+	                })
+	            .catch((e) => {
+                        console.error(e);
+                        res.status(200).send(e);
+	            });
+	    },
+	    (e) => {
+	        console.error(e);
+	        res.json('Error in fetching current schema: ' + e.toString());
+	    })
+	.catch((e) => {
+	    e.stackTrace();
+	    res.json('Error in fetching current schema: ' + e.toString());
+	});
+});
+
 module.exports = router;

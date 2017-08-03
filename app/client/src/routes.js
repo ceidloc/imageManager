@@ -7,6 +7,7 @@ import SignUpPage from './containers/SignUpPage.jsx';
 import GalleryPage from './containers/GalleryPage.jsx';
 import AddImagePage from './containers/AddImagePage.jsx';
 import ViewImagePage from './containers/ViewImagePage.jsx';
+import EditImagePage from './containers/EditImagePage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -47,6 +48,10 @@ const routes = {
       {
           path: '/viewimage/:image_id',
           component: ViewImagePage
+      },
+      {
+          path: '/editimage/:image_id',
+          component: EditImagePage
       },
 
     {
