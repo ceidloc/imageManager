@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText,CardMedia } from 'material-ui/Card';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router';
 
@@ -13,9 +13,9 @@ class ViewImage extends React.Component {
         return (
             <Card className="container">
               <CardTitle title= {this.props.data.caption}/>              
-              <CardText style={{ fontSize: '20px', color: 'black' }}>                
-                {this.props.data.url}
-              </CardText>
+              <CardMedia >
+		<img src={this.props.data.url} />						
+	      </CardMedia>
               <CardText style={{ fontSize: '16px', color: 'green' }}>                
                 {this.props.data.description} 
               </CardText>

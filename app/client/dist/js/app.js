@@ -44075,7 +44075,11 @@
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/viewimage/' + data.image_id },
-	                        _react2.default.createElement(_Card.CardTitle, { title: data.url })
+	                        _react2.default.createElement(
+	                            _Card.CardMedia,
+	                            null,
+	                            _react2.default.createElement('img', { src: data.url })
+	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        _Card.CardText,
@@ -44512,9 +44516,9 @@
 	                { className: 'container' },
 	                _react2.default.createElement(_Card.CardTitle, { title: this.props.data.caption }),
 	                _react2.default.createElement(
-	                    _Card.CardText,
-	                    { style: { fontSize: '20px', color: 'black' } },
-	                    this.props.data.url
+	                    _Card.CardMedia,
+	                    null,
+	                    _react2.default.createElement('img', { src: this.props.data.url })
 	                ),
 	                _react2.default.createElement(
 	                    _Card.CardText,

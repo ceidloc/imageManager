@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardMedia } from 'material-ui/Card';
 import Auth from '../modules/Auth';
 import { Link } from 'react-router';
 
@@ -11,7 +11,9 @@ class Gallery extends React.Component {
             return (
                 <Card className="imageRow" key={data.image_id}>
                   <Link to = {'/viewimage/' + data.image_id} >
-                    <CardTitle title= {data.url}/>
+                    <CardMedia >
+		      <img src={data.url} />						
+	            </CardMedia>
                   </Link>
                   <CardText style={{ fontSize: '16px', color: 'yellow' }}>Caption:{data.caption}</CardText>
                 </Card>
