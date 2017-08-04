@@ -105,6 +105,60 @@ router.post('/gallery', (req, res) => {
 	});
 });
 
+router.post('/filterByTag', (req, res) => {
+	
+    headers.Authorization = 'Bearer ' + req.headers['x-hasura-session-id'];
+    //headers.Authorization = req.headers.authorization;
+    headers['X-Hasura-Role'] = req.headers['x-hasura-role'];
+    headers['X-Hasura-User-Id'] = req.headers['x-hasura-user-id'];
+    var user_id = parseInt(req.body.user_id);
+    var tag_name = req.body.tag_name;
+    //var user_id =38 ;
+    
+    var schemaFetchUrl = 'http://data.c101.hasura.me/v1/query';
+    var options = {
+	method: 'POST',
+	body: JSON.stringify({
+	    type: 'select',
+	    args: {
+	        "table": "filterbytag",
+	        "columns": ['*'],
+                "where": {
+                    "user_id": user_id,
+                    "tag_name": tag_name
+                },
+	        "order_by": ["-image_id"]
+	    }})
+    };
+
+    fetch(schemaFetchUrl, options)
+	.then(
+	    (response) => {
+	        response.text()
+	            .then(
+	                (data) => {
+                            console.error(data);
+                            console.error(user_id);
+	            	    res.status(200).send(data);
+	                },
+	                (e) => {
+	                    res.json('Error in fetching current schema: ' + err.toString());
+	                })
+	            .catch((e) => {
+	                e.stack();
+	                res.json('Error in fetching current schema: ' + e.toString());
+	            });
+	    },
+	    (e) => {
+	        console.error(e);
+	        res.json('Error in fetching current schema: ' + e.toString());
+	    })
+	.catch((e) => {
+	    e.stackTrace();
+	    res.json('Error in fetching current schema: ' + e.toString());
+	});
+});
+
 router.post('/addimage', (req, res) => {
 
     var user_id = parseInt(req.body.user_id);

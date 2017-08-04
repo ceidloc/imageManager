@@ -73,11 +73,8 @@ class ImageTagEdit extends React.Component {
             var tagged = this.state.tagged;
             var untagged = new Array();
             for(var i = 0; i < data.length; i++) {
-                console.error(data[i]);
-                console.error("fucking dick fafsad"+data[i].tag_name);
                 var count = 0;
                 for(var j = 0; j < tagged.length; j++) {
-                    console.error("fucking cock aeae  "+tagged[j].tag_name);
                     if (tagged[j].tag_name === data[i].tag_name) {
                         count++;
                     }                        

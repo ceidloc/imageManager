@@ -35245,15 +35245,15 @@
 
 	var _GalleryPage2 = _interopRequireDefault(_GalleryPage);
 
-	var _AddImagePage = __webpack_require__(477);
+	var _AddImagePage = __webpack_require__(478);
 
 	var _AddImagePage2 = _interopRequireDefault(_AddImagePage);
 
-	var _ViewImagePage = __webpack_require__(479);
+	var _ViewImagePage = __webpack_require__(480);
 
 	var _ViewImagePage2 = _interopRequireDefault(_ViewImagePage);
 
-	var _EditImagePage = __webpack_require__(481);
+	var _EditImagePage = __webpack_require__(482);
 
 	var _EditImagePage2 = _interopRequireDefault(_EditImagePage);
 
@@ -43951,6 +43951,12 @@
 
 	var _Gallery2 = _interopRequireDefault(_Gallery);
 
+	var _FilterByTag = __webpack_require__(477);
+
+	var _FilterByTag2 = _interopRequireDefault(_FilterByTag);
+
+	var _Card = __webpack_require__(400);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43971,8 +43977,11 @@
 	    var _this = _possibleConstructorReturn(this, (GalleryPage.__proto__ || Object.getPrototypeOf(GalleryPage)).call(this, props));
 
 	    _this.state = {
-	      data: []
+	      data: [],
+	      filterTag: ''
 	    };
+	    _this.filterByTag = _this.filterByTag.bind(_this);
+	    _this.changeTag = _this.changeTag.bind(_this);
 	    return _this;
 	  }
 
@@ -44007,6 +44016,45 @@
 	      //      console.error(formData);
 	      xhr.send(formData);
 	    }
+	  }, {
+	    key: 'filterByTag',
+	    value: function filterByTag(event) {
+	      var _this3 = this;
+
+	      event.preventDefault();
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const user_id = encodeURIComponent("38");
+	      var user_id = encodeURIComponent(this.props.params.user_id);
+	      var tag_name = encodeURIComponent(this.state.filterTag);
+	      var formData = 'user_id=' + user_id + '&tag_name=' + tag_name;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/filterByTag');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          _this3.setState({
+	            data: xhr.response
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+	  }, {
+	    key: 'changeTag',
+	    value: function changeTag(event) {
+	      var field = event.target.name;
+	      var tag = event.target.value;
+
+	      this.setState({
+	        filterTag: tag
+	      });
+	    }
 
 	    /**
 	     * Render the component.
@@ -44015,7 +44063,16 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Gallery2.default, { data: this.state.data, user_id: this.props.params.user_id });
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { name: 'container' },
+	        _react2.default.createElement(_FilterByTag2.default, {
+	          filterTag: this.state.filterTag,
+	          onChange: this.changeTag,
+	          onSubmit: this.filterByTag
+	        }),
+	        _react2.default.createElement(_Gallery2.default, { data: this.state.data, user_id: this.props.params.user_id })
+	      );
 	    }
 	  }]);
 
@@ -44130,7 +44187,91 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AddImage = __webpack_require__(478);
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _TextField = __webpack_require__(463);
+
+	var _TextField2 = _interopRequireDefault(_TextField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FilterByTag = function (_React$Component) {
+	  _inherits(FilterByTag, _React$Component);
+
+	  function FilterByTag() {
+	    _classCallCheck(this, FilterByTag);
+
+	    return _possibleConstructorReturn(this, (FilterByTag.__proto__ || Object.getPrototypeOf(FilterByTag)).apply(this, arguments));
+	  }
+
+	  _createClass(FilterByTag, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'form',
+	          { action: '/', onSubmit: this.props.onSubmit },
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'card-heading' },
+	            'Sign Up'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'field-line' },
+	            _react2.default.createElement(_TextField2.default, {
+	              floatingLabelText: 'Search Image By Tag',
+	              name: 'name',
+	              onChange: this.props.onChange,
+	              value: this.props.filterTag
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'button-line' },
+	            _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Search', primary: true })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FilterByTag;
+	}(_react2.default.Component);
+
+	exports.default = FilterByTag;
+
+/***/ }),
+/* 478 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _AddImage = __webpack_require__(479);
 
 	var _AddImage2 = _interopRequireDefault(_AddImage);
 
@@ -44268,7 +44409,7 @@
 	exports.default = AddImagePage;
 
 /***/ }),
-/* 478 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44368,7 +44509,7 @@
 	exports.default = AddImage;
 
 /***/ }),
-/* 479 */
+/* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44387,7 +44528,7 @@
 
 	var _Auth2 = _interopRequireDefault(_Auth);
 
-	var _ViewImage = __webpack_require__(480);
+	var _ViewImage = __webpack_require__(481);
 
 	var _ViewImage2 = _interopRequireDefault(_ViewImage);
 
@@ -44465,7 +44606,7 @@
 	exports.default = ViewImagePage;
 
 /***/ }),
-/* 480 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44544,7 +44685,7 @@
 	exports.default = ViewImage;
 
 /***/ }),
-/* 481 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44559,11 +44700,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _EditImage = __webpack_require__(482);
+	var _EditImage = __webpack_require__(483);
 
 	var _EditImage2 = _interopRequireDefault(_EditImage);
 
-	var _ImageTagEdit = __webpack_require__(483);
+	var _ImageTagEdit = __webpack_require__(484);
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 
@@ -44747,7 +44888,7 @@
 	exports.default = EditImagePage;
 
 /***/ }),
-/* 482 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44847,7 +44988,7 @@
 	exports.default = EditImage;
 
 /***/ }),
-/* 483 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44868,11 +45009,11 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _ImageTagAdd = __webpack_require__(484);
+	var _ImageTagAdd = __webpack_require__(485);
 
 	var _ImageTagAdd2 = _interopRequireDefault(_ImageTagAdd);
 
-	var _ImageTagDelete = __webpack_require__(485);
+	var _ImageTagDelete = __webpack_require__(486);
 
 	var _ImageTagDelete2 = _interopRequireDefault(_ImageTagDelete);
 
@@ -44964,11 +45105,8 @@
 	                    var tagged = _this3.state.tagged;
 	                    var untagged = new Array();
 	                    for (var i = 0; i < data.length; i++) {
-	                        console.error(data[i]);
-	                        console.error("fucking dick fafsad" + data[i].tag_name);
 	                        var count = 0;
 	                        for (var j = 0; j < tagged.length; j++) {
-	                            console.error("fucking cock aeae  " + tagged[j].tag_name);
 	                            if (tagged[j].tag_name === data[i].tag_name) {
 	                                count++;
 	                            }
@@ -45143,7 +45281,7 @@
 	exports.default = ImageTagEdit;
 
 /***/ }),
-/* 484 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45215,7 +45353,7 @@
 	exports.default = ImageTagAdd;
 
 /***/ }),
-/* 485 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
