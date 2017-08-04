@@ -135,7 +135,7 @@ class EditImagePage extends React.Component {
       return ((
           <div>
             <ImageTagEdit
-              image_id ={this.state.image_id}
+              image_id ={this.state.image.image_id}
             />
             <EditImage
               onSubmit={this.processForm}

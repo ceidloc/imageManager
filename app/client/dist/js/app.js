@@ -44725,7 +44725,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_ImageTagEdit2.default, {
-	          image_id: this.state.image_id
+	          image_id: this.state.image.image_id
 	        }),
 	        _react2.default.createElement(_EditImage2.default, {
 	          onSubmit: this.processForm,
@@ -44853,7 +44853,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -44878,6 +44878,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -44885,208 +44887,257 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var ImageTagEdit = function (_React$Component) {
-	  _inherits(ImageTagEdit, _React$Component);
-
-	  /**
-	   * Class constructor.
-	   */
-	  function ImageTagEdit(props, context) {
-	    _classCallCheck(this, ImageTagEdit);
-
-	    // set the initial component state
-	    var _this = _possibleConstructorReturn(this, (ImageTagEdit.__proto__ || Object.getPrototypeOf(ImageTagEdit)).call(this, props, context));
-
-	    _this.state = {
-	      tagged: [],
-	      untagged: []
-	    };
-
-	    _this.addTag = _this.addTag.bind(_this);
-	    _this.deleteTag = _this.deleteTag.bind(_this);
-	    return _this;
-	  }
-
-	  /*
-	    loading existing image data
-	    */
-
-	  _createClass(ImageTagEdit, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const image_id = encodeURIComponent("38");
-	      var image_id = encodeURIComponent(this.props.image_id);
-	      var formData = 'image_id=' + image_id;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/getImageTags');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          var data = xhr.response;
-	          console.error("xhr.response:");
-	          _this2.setState({
-	            tagged: data
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this3 = this;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const image_id = encodeURIComponent("38");
-	      var image_id = encodeURIComponent(this.props.image_id);
-	      var formData = 'image_id=' + image_id;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/getAllTags');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          var data = xhr.response;
-	          console.error("xhr.response:");
-	          _this3.setState({
-	            untagged: data
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
+	    _inherits(ImageTagEdit, _React$Component);
 
 	    /**
-	     * Process the form.
-	     *
-	     * @param {object} event - the JavaScript event object
+	     * Class constructor.
 	     */
+	    function ImageTagEdit(props, context) {
+	        _classCallCheck(this, ImageTagEdit);
 
-	  }, {
-	    key: 'addTag',
-	    value: function addTag(event, tagName) {
-	      var _this4 = this;
+	        // set the initial component state
+	        var _this = _possibleConstructorReturn(this, (ImageTagEdit.__proto__ || Object.getPrototypeOf(ImageTagEdit)).call(this, props, context));
 
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
+	        _this.state = {
+	            tagged: [],
+	            untagged: []
+	        };
 
-	      // create a string for an HTTP body message
-	      var image_id = encodeURIComponent(this.props.image_id);
-	      var tag_name = encodeURIComponent(tagName);
-	      var formData = 'image_id=' + image_id + '&tag_name=' + tag_name;
+	        _this.addTag = _this.addTag.bind(_this);
+	        _this.deleteTag = _this.deleteTag.bind(_this);
+	        return _this;
+	    }
 
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
+	    /*
+	      loading existing image data
+	      */
 
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/addImageTag');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-	          console.error("in add tag: " + xhr.response);
-	          // change the component-container state
-	          _this4.setState({
-	            untagged: xhr.response
-	          });
+	    _createClass(ImageTagEdit, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _this2 = this;
 
-	          // set a message
-	          // make a redirect
-	        } else {
-	          // failure
+	            console.error("in will mount");
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+	            //const image_id = encodeURIComponent("38");
+	            var image_id = encodeURIComponent(this.props.image_id);
+	            var formData = 'image_id=' + image_id;
 
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-	          console.error("in add tag ERRORS: " + errors);
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/getImageTags');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    var data = xhr.response;
+	                    _this2.setState({
+	                        tagged: data
+	                    });
+	                }
+	            });
+	            //      console.error(formData);
+	            xhr.send(formData);
 	        }
-	      });
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'deleteTag',
-	    value: function deleteTag(event, tagName) {
-	      var _this5 = this;
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this3 = this;
 
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
+	            console.error("in did mount");
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+	            //const image_id = encodeURIComponent("38");
+	            var image_id = encodeURIComponent(this.props.image_id);
+	            var formData = 'image_id=' + image_id;
 
-	      // create a string for an HTTP body message
-	      var image_id = encodeURIComponent(this.props.image_id);
-	      var tag_name = encodeURIComponent(tagName);
-	      var formData = 'image_id=' + image_id + '&tag_name=' + tag_name;
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/getAllTags');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    var data = xhr.response;
+	                    // adding tags from data which are not in tagged
+	                    var tagged = _this3.state.tagged;
+	                    var untagged = new Array();
+	                    for (var i = 0; i < data.length; i++) {
+	                        console.error(data[i]);
+	                        console.error("fucking dick fafsad" + data[i].tag_name);
+	                        var count = 0;
+	                        for (var j = 0; j < tagged.length; j++) {
+	                            console.error("fucking cock aeae  " + tagged[j].tag_name);
+	                            if (tagged[j].tag_name === data[i].tag_name) {
+	                                count++;
+	                            }
+	                        }
+	                        if (count === 0) {
+	                            untagged = [].concat(_toConsumableArray(untagged), [{ "tag_name": data[i].tag_name }]);
+	                        }
+	                    }
 
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/deleteImageTag');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-	          console.error("in add tag: " + xhr.response);
-	          // change the component-container state
-	          _this5.setState({
-	            tagged: xhr.response
-	          });
-
-	          // set a message
-	          // make a redirect
-	        } else {
-	          // failure
-
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-	          console.error("in add tag ERRORS: " + errors);
+	                    _this3.setState({
+	                        untagged: [].concat(_toConsumableArray(untagged))
+	                    });
+	                }
+	            });
+	            //      console.error(formData);
+	            xhr.send(formData);
 	        }
-	      });
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'render',
+
+	        /**
+	         * Process the form.
+	         *
+	         * @param {object} event - the JavaScript event object
+	         */
+
+	    }, {
+	        key: 'addTag',
+	        value: function addTag(tagName) {
+	            var _this4 = this;
+
+	            // prevent default action. in this case, action is the form submission event
+	            //event.preventDefault();
+
+	            // create a string for an HTTP body message
+	            //const image_id = encodeURIComponent(this.state.image_id);
+	            var image_id = encodeURIComponent(this.props.image_id);
+	            var tag_name = encodeURIComponent(tagName);
+	            var formData = 'image_id=' + image_id + '&tag_name=' + tag_name;
+
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+
+	            // create an AJAX request
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/addImageTag');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    // success
+	                    // change the component-container state
+	                    var newTag = { "tag_name": tag_name };
+	                    var tagged = _this4.state.tagged;
+	                    tagged = [].concat(_toConsumableArray(tagged), [newTag]);
+	                    var data = _this4.state.untagged;
+	                    //removing this tag from untagged array
+	                    var untagged = [];
+	                    for (var i = 0; i < data.length; i++) {
+	                        if (newTag.tag_name === data[i].tag_name) {
+	                            ;
+	                        } else {
+	                            untagged = [].concat(_toConsumableArray(untagged), [{ "tag_name": data[i].tag_name }]);
+	                        }
+	                    }
+
+	                    _this4.setState({
+	                        tagged: [].concat(_toConsumableArray(tagged)),
+	                        untagged: [].concat(_toConsumableArray(untagged))
+	                    });
+
+	                    // set a message
+	                    // make a redirect
+	                } else {
+	                    // failure
+
+	                    var errors = xhr.response.errors ? xhr.response.errors : {};
+	                    errors.summary = xhr.response.message;
+	                    console.error("in add tag ERRORS: " + errors);
+	                }
+	            });
+	            xhr.send(formData);
+	        }
+	    }, {
+	        key: 'deleteTag',
+	        value: function deleteTag(tagName) {
+	            var _this5 = this;
+
+	            // prevent default action. in this case, action is the form submission event
+	            //event.preventDefault();
+
+	            // create a string for an HTTP body message
+	            var image_id = encodeURIComponent(this.props.image_id);
+	            var tag_name = encodeURIComponent(tagName);
+	            var formData = 'image_id=' + image_id + '&tag_name=' + tag_name;
+
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+
+	            // create an AJAX request
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/deleteImageTag');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    // success
+	                    console.error("in delete tag: " + xhr.response);
+	                    // change the component-container state
+	                    var newTag = { "tag_name": tag_name };
+	                    var untagged = _this5.state.untagged;
+	                    untagged = [].concat(_toConsumableArray(untagged), [newTag]);
+	                    var data = _this5.state.tagged;
+	                    //removing this tag from untagged array
+
+	                    var tagged = [];
+	                    for (var i = 0; i < data.length; i++) {
+	                        if (newTag.tag_name === data[i].tag_name) {
+	                            ;
+	                        } else {
+	                            tagged = [].concat(_toConsumableArray(tagged), [{ "tag_name": data[i].tag_name }]);
+	                        }
+	                    }
+
+	                    _this5.setState({
+	                        tagged: [].concat(_toConsumableArray(tagged)),
+	                        untagged: [].concat(_toConsumableArray(untagged))
+	                    });
+
+	                    // set a message
+	                    // make a redirect
+	                } else {
+	                    // failure
+
+	                    var errors = xhr.response.errors ? xhr.response.errors : {};
+	                    errors.summary = xhr.response.message;
+	                    console.error("in add tag ERRORS: " + errors);
+	                }
+	            });
+	            xhr.send(formData);
+	        }
+	    }, {
+	        key: 'render',
 
 
-	    /**
-	     * Render the component.
-	     */
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _Card.Card,
-	        { name: 'container' },
-	        _react2.default.createElement(_ImageTagAdd2.default, {
-	          onSubmit: this.deleteTag,
-	          data: this.state.tagged
-	        }),
-	        _react2.default.createElement(_ImageTagAdd2.default, {
-	          onSubmit: this.addTag,
-	          data: this.state.untagged
-	        })
-	      );
-	    }
-	  }]);
+	        /**
+	         * Render the component.
+	         */
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { name: 'container' },
+	                _react2.default.createElement(_ImageTagAdd2.default, {
+	                    onSubmit: this.deleteTag,
+	                    data: this.state.tagged
+	                }),
+	                _react2.default.createElement(_ImageTagAdd2.default, {
+	                    onSubmit: this.addTag,
+	                    data: this.state.untagged
+	                })
+	            );
+	        }
+	    }]);
 
-	  return ImageTagEdit;
+	    return ImageTagEdit;
 	}(_react2.default.Component);
 
 	ImageTagEdit.contextTypes = {
-	  router: _react.PropTypes.object.isRequired
+	    router: _react.PropTypes.object.isRequired
 	};
 
 	exports.default = ImageTagEdit;
@@ -45131,10 +45182,7 @@
 	    _createClass(ImageTagAdd, [{
 	        key: 'render',
 	        value: function render() {
-	            function changeTags(tag_name) {
-	                this.props.onSubmit(tag_name);
-	            };
-
+	            var handleClick = this.props.onSubmit;
 	            var data = this.props.data.map(function (data, i) {
 	                return _react2.default.createElement(
 	                    _Card.Card,
@@ -45144,7 +45192,9 @@
 	                        { style: { fontSize: '16px', color: 'green' } },
 	                        _react2.default.createElement(
 	                            'button',
-	                            { onClick: changeTags(data.tag_name) },
+	                            { onClick: function onClick(e) {
+	                                    return handleClick(data.tag_name);
+	                                } },
 	                            data.tag_name
 	                        )
 	                    )

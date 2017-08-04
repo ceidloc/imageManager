@@ -5,23 +5,18 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 
 class ImageTagAdd extends React.Component {        
-
-
     
     render() {
-         function changeTags(tag_name){
-                this.props.onSubmit(tag_name);
-         };
-        
+        var handleClick = this.props.onSubmit;
         var data = this.props.data.map(function(data, i) {
-            return (
+            return (                
                 <Card className="userRow" key={i}>
                     <CardText style={{ fontSize: '16px', color: 'green' }}>
-                      <button onClick = {changeTags(data.tag_name)}>{data.tag_name}</button>
+                    <button onClick = {(e)=>handleClick(data.tag_name)}>{data.tag_name}</button>
                     </CardText>
                 </Card>
             );
-        });
+        });        
 
         return (
 	    <Card className="container">	      

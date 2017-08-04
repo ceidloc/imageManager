@@ -424,4 +424,125 @@ router.post('/getAllTags', (req, res) => {
 	});
 });
 
+router.post('/addImageTag', (req, res) => {
+
+    headers.Authorization = req.headers.authorization;
+    //headers.Authorization = req.headers.authorization;
+    //headers['X-Hasura-Role'] = req.headers['x-hasura-role'];
+    //headers['X-Hasura-Role'] = "user";
+    //headers['X-Hasura-User-Id'] = user_id;
+    var image_id = parseInt(req.body.image_id);
+    var tag_name = req.body.tag_name;
+
+    //var user_id =38 ;
+    //console.error(req.body);
+    
+    var schemaFetchUrl = 'http://data.c101.hasura.me/v1/query';
+    var options = {
+	method: 'POST',
+        headers,
+	body: JSON.stringify({
+	    type: 'insert',     
+	    args: {
+	        "table":"Image_Tag",
+	        "objects":[
+		    {
+			"image_id": image_id,
+			"tag_name": tag_name		
+		}
+	   ]
+	}
+        })
+    };
+
+    fetch(schemaFetchUrl, options)
+	.then(
+	    (response) => {
+	        response.text()
+	            .then(
+	                (data) => {
+                            data=JSON.parse(data);
+                            console.error("in add tag api");
+                            console.error(data);
+                            console.error(image_id);
+	            	    res.status(200).send(data);
+	                },
+	                (e) => {
+	                    res.json('Error in fetching current schema: ' + err.toString());
+	                })
+	            .catch((e) => {
+                        console.error(e);
+                        res.status(200).send();
+	            });
+	    },
+	    (e) => {
+	        console.error(e);
+	        res.json('Error in fetching current schema: ' + e.toString());
+	    })
+	.catch((e) => {
+	    e.stackTrace();
+	    res.json('Error in fetching current schema: ' + e.toString());
+	});
+});
+
+router.post('/deleteImageTag', (req, res) => {
+
+    headers.Authorization = req.headers.authorization;
+    //headers.Authorization = req.headers.authorization;
+    //headers['X-Hasura-Role'] = req.headers['x-hasura-role'];
+    //headers['X-Hasura-Role'] = "user";
+    //headers['X-Hasura-User-Id'] = user_id;
+    var image_id = parseInt(req.body.image_id);
+    var tag_name = req.body.tag_name;
+
+    //var user_id =38 ;
+    //console.error(req.body);
+    
+    var schemaFetchUrl = 'http://data.c101.hasura.me/v1/query';
+    var options = {
+	method: 'POST',
+        headers,
+	body: JSON.stringify({
+	    type: 'delete',     
+	    args: {
+	        "table":"Image_Tag",
+	        "where":[
+		    {
+			"image_id": image_id,
+			"tag_name": tag_name		
+		}
+	   ]
+	}
+        })
+    };
+
+    fetch(schemaFetchUrl, options)
+	.then(
+	    (response) => {
+	        response.text()
+	            .then(
+	                (data) => {
+                            console.error("delete tag");
+                            console.error(data);
+                            console.error(image_id);
+	            	    res.status(200).send(data);
+	                },
+	                (e) => {
+	                    res.json('Error in fetching current schema: ' + err.toString());
+	                })
+	            .catch((e) => {
+                        console.error(e);
+                        res.status(200).send();
+	            });
+	    },
+	    (e) => {
+	        console.error(e);
+	        res.json('Error in fetching current schema: ' + e.toString());
+	    })
+	.catch((e) => {
+	    e.stackTrace();
+	    res.json('Error in fetching current schema: ' + e.toString());
+	});
+});
+
 module.exports = router;
