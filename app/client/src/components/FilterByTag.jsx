@@ -11,7 +11,7 @@ class FilterByTag extends React.Component {
         return  (
             <Card className="container">
               <form  action = '/' onSubmit={this.props.onSubmit}>
-                <h2 className="card-heading">Sign Up</h2>
+                <h2 className="card-heading">Gallery</h2>
                 <div className="field-line">
                   <TextField
                     floatingLabelText="Search Image By Tag"

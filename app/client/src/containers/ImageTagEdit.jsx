@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import Auth from '../modules/Auth';
-import { Card, CardText } from 'material-ui/Card';
-import ImageTagAdd from '../components/ImageTagAdd.jsx';
-import ImageTagDelete from '../components/ImageTagDelete.jsx';
+import { Card, CardText, CardTitle } from 'material-ui/Card';
+import ImageTagEditForm from '../components/ImageTagEditForm.jsx';
 
 class ImageTagEdit extends React.Component {
 
@@ -42,9 +41,26 @@ class ImageTagEdit extends React.Component {
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
-            const data = xhr.response;
+            var data = xhr.response;
+
+            var tagged = data;
+            data = this.state.untagged;
+            var untagged = new Array();
+            for(var i = 0; i < data.length; i++) {
+                var count = 0;
+                for(var j = 0; j < tagged.length; j++) {
+                    if (tagged[j].tag_name === data[i].tag_name) {
+                        count++;
+                    }                        
+                }
+                if (count === 0){
+                    untagged = [...untagged,{"tag_name":data[i].tag_name}];
+                }
+            }
+            
             this.setState({
-                tagged: data
+                tagged:[ ...tagged],
+                untagged: [...untagged]
             });
 
         }
@@ -220,12 +236,18 @@ class ImageTagEdit extends React.Component {
    */
   render() {
       return ((
-          <Card name="container">
-            <ImageTagAdd
+          <Card className="container">
+            <CardTitle title= "tags"/>
+            <CardText style={{ fontSize: '16px', color: 'green' }}>
+            </CardText>
+            <ImageTagEditForm
               onSubmit={this.deleteTag}
               data={this.state.tagged}
             />
-            <ImageTagAdd
+            <CardTitle title= "add tags"/>
+            <CardText style={{ fontSize: '16px', color: 'blue' }}>
+            </CardText>
+            <ImageTagEditForm
               onSubmit={this.addTag}
               data={this.state.untagged}
             />

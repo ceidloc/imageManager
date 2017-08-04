@@ -88,7 +88,7 @@ class GalleryPage extends React.Component {
    */
   render() {
       return ((
-          <Card name="container">
+          <Card className="container">
             <FilterByTag
               filterTag = {this.state.filterTag}
               onChange = {this.changeTag}

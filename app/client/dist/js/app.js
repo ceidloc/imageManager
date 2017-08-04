@@ -44065,7 +44065,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _Card.Card,
-	        { name: 'container' },
+	        { className: 'container' },
 	        _react2.default.createElement(_FilterByTag2.default, {
 	          filterTag: this.state.filterTag,
 	          onChange: this.changeTag,
@@ -44228,7 +44228,7 @@
 	          _react2.default.createElement(
 	            'h2',
 	            { className: 'card-heading' },
-	            'Sign Up'
+	            'Gallery'
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -44532,6 +44532,12 @@
 
 	var _ViewImage2 = _interopRequireDefault(_ViewImage);
 
+	var _ImageTagEdit = __webpack_require__(484);
+
+	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
+
+	var _Card = __webpack_require__(400);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44596,7 +44602,14 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id });
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { className: 'container' },
+	        _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id }),
+	        _react2.default.createElement(_ImageTagEdit2.default, {
+	          image_id: this.props.params.image_id
+	        })
+	      );
 	    }
 	  }]);
 
@@ -44711,6 +44724,8 @@
 	var _Auth = __webpack_require__(398);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Card = __webpack_require__(400);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44863,16 +44878,16 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_ImageTagEdit2.default, {
-	          image_id: this.state.image.image_id
-	        }),
+	        _Card.Card,
+	        { name: 'container' },
 	        _react2.default.createElement(_EditImage2.default, {
 	          onSubmit: this.processForm,
 	          onChange: this.changeImage,
 	          errors: this.state.errors,
 	          image: this.state.image
+	        }),
+	        _react2.default.createElement(_ImageTagEdit2.default, {
+	          image_id: this.state.image.image_id
 	        })
 	      );
 	    }
@@ -45009,13 +45024,9 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _ImageTagAdd = __webpack_require__(485);
+	var _ImageTagEditForm = __webpack_require__(485);
 
-	var _ImageTagAdd2 = _interopRequireDefault(_ImageTagAdd);
-
-	var _ImageTagDelete = __webpack_require__(486);
-
-	var _ImageTagDelete2 = _interopRequireDefault(_ImageTagDelete);
+	var _ImageTagEditForm2 = _interopRequireDefault(_ImageTagEditForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45073,8 +45084,25 @@
 	            xhr.addEventListener('load', function () {
 	                if (xhr.status === 200) {
 	                    var data = xhr.response;
+
+	                    var tagged = data;
+	                    data = _this2.state.untagged;
+	                    var untagged = new Array();
+	                    for (var i = 0; i < data.length; i++) {
+	                        var count = 0;
+	                        for (var j = 0; j < tagged.length; j++) {
+	                            if (tagged[j].tag_name === data[i].tag_name) {
+	                                count++;
+	                            }
+	                        }
+	                        if (count === 0) {
+	                            untagged = [].concat(_toConsumableArray(untagged), [{ "tag_name": data[i].tag_name }]);
+	                        }
+	                    }
+
 	                    _this2.setState({
-	                        tagged: data
+	                        tagged: [].concat(_toConsumableArray(tagged)),
+	                        untagged: [].concat(_toConsumableArray(untagged))
 	                    });
 	                }
 	            });
@@ -45258,12 +45286,16 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                _Card.Card,
-	                { name: 'container' },
-	                _react2.default.createElement(_ImageTagAdd2.default, {
+	                { className: 'container' },
+	                _react2.default.createElement(_Card.CardTitle, { title: 'tags' }),
+	                _react2.default.createElement(_Card.CardText, { style: { fontSize: '16px', color: 'green' } }),
+	                _react2.default.createElement(_ImageTagEditForm2.default, {
 	                    onSubmit: this.deleteTag,
 	                    data: this.state.tagged
 	                }),
-	                _react2.default.createElement(_ImageTagAdd2.default, {
+	                _react2.default.createElement(_Card.CardTitle, { title: 'add tags' }),
+	                _react2.default.createElement(_Card.CardText, { style: { fontSize: '16px', color: 'blue' } }),
+	                _react2.default.createElement(_ImageTagEditForm2.default, {
 	                    onSubmit: this.addTag,
 	                    data: this.state.untagged
 	                })
@@ -45323,19 +45355,11 @@
 	            var handleClick = this.props.onSubmit;
 	            var data = this.props.data.map(function (data, i) {
 	                return _react2.default.createElement(
-	                    _Card.Card,
-	                    { className: 'userRow', key: i },
-	                    _react2.default.createElement(
-	                        _Card.CardText,
-	                        { style: { fontSize: '16px', color: 'green' } },
-	                        _react2.default.createElement(
-	                            'button',
-	                            { onClick: function onClick(e) {
-	                                    return handleClick(data.tag_name);
-	                                } },
-	                            data.tag_name
-	                        )
-	                    )
+	                    'button',
+	                    { onClick: function onClick(e) {
+	                            return handleClick(data.tag_name);
+	                        }, key: i },
+	                    data.tag_name
 	                );
 	            });
 
@@ -45351,75 +45375,6 @@
 	}(_react2.default.Component);
 
 	exports.default = ImageTagAdd;
-
-/***/ }),
-/* 486 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(339);
-
-	var _Card = __webpack_require__(400);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ImageTagDelete = function (_React$Component) {
-	    _inherits(ImageTagDelete, _React$Component);
-
-	    function ImageTagDelete() {
-	        _classCallCheck(this, ImageTagDelete);
-
-	        return _possibleConstructorReturn(this, (ImageTagDelete.__proto__ || Object.getPrototypeOf(ImageTagDelete)).apply(this, arguments));
-	    }
-
-	    _createClass(ImageTagDelete, [{
-	        key: 'render',
-	        value: function render() {
-	            var data = this.props.data.map(function (data, i) {
-	                return _react2.default.createElement(
-	                    _Card.Card,
-	                    { className: 'userRow', key: i },
-	                    _react2.default.createElement(
-	                        _Card.CardText,
-	                        { style: { fontSize: '16px', color: 'green' } },
-	                        _react2.default.createElement(
-	                            'button',
-	                            { onClick: this.props.onSubmit(data) },
-	                            data
-	                        )
-	                    )
-	                );
-	            });
-
-	            return _react2.default.createElement(
-	                _Card.Card,
-	                { className: 'container' },
-	                data
-	            );
-	        }
-	    }]);
-
-	    return ImageTagDelete;
-	}(_react2.default.Component);
-
-	exports.default = ImageTagDelete;
 
 /***/ })
 /******/ ]);

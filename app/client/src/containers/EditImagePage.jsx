@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import EditImage from '../components/EditImage.jsx';
 import ImageTagEdit from '../containers/ImageTagEdit.jsx';
 import Auth from '../modules/Auth';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 class EditImagePage extends React.Component {
 
@@ -133,17 +134,17 @@ class EditImagePage extends React.Component {
    */
   render() {
       return ((
-          <div>
-            <ImageTagEdit
-              image_id ={this.state.image.image_id}
-            />
+          <Card name = "container">            
             <EditImage
               onSubmit={this.processForm}
               onChange={this.changeImage}
               errors={this.state.errors}
               image={this.state.image}
             />
-          </div>
+            <ImageTagEdit
+              image_id ={this.state.image.image_id}
+            />
+          </Card>
       ));
   }
 

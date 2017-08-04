@@ -9,17 +9,13 @@ class ImageTagAdd extends React.Component {
     render() {
         var handleClick = this.props.onSubmit;
         var data = this.props.data.map(function(data, i) {
-            return (                
-                <Card className="userRow" key={i}>
-                    <CardText style={{ fontSize: '16px', color: 'green' }}>
-                    <button onClick = {(e)=>handleClick(data.tag_name)}>{data.tag_name}</button>
-                    </CardText>
-                </Card>
+            return (                                
+                    <button onClick = {(e)=>handleClick(data.tag_name)} key = {i}>{data.tag_name}</button>
             );
         });        
 
         return (
-	    <Card className="container">	      
+	    <Card className="container">
 	      {data}	      
 	    </Card>
 	);
