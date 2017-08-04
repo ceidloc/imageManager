@@ -13,7 +13,7 @@ const EditImage = ({
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">Add Image</h2>
+      <h2 className="card-heading">Edit Image</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 

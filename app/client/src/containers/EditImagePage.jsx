@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import EditImage from '../components/EditImage.jsx';
+import ImageTagEdit from '../containers/ImageTagEdit.jsx';
 import Auth from '../modules/Auth';
 
 class EditImagePage extends React.Component {
@@ -131,14 +132,19 @@ class EditImagePage extends React.Component {
    * Render the component.
    */
   render() {
-    return (
-      <EditImage
-        onSubmit={this.processForm}
-        onChange={this.changeImage}
-        errors={this.state.errors}
-        image={this.state.image}
-      />
-    );
+      return ((
+          <div>
+            <ImageTagEdit
+              image_id ={this.state.image_id}
+            />
+            <EditImage
+              onSubmit={this.processForm}
+              onChange={this.changeImage}
+              errors={this.state.errors}
+              image={this.state.image}
+            />
+          </div>
+      ));
   }
 
 }
