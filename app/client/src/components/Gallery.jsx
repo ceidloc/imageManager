@@ -9,21 +9,21 @@ class Gallery extends React.Component {
     render() {
         var data = this.props.data.map(function(data) {
             return (
-                <Card className="imageRow" key={data.image_id}>
+                <div className="imageRow" key={data.image_id}>
+                  <CardText style={{ fontSize: '16px', color: 'white' }}>Caption: {data.caption}</CardText>
                   <Link to = {'/viewimage/' + data.image_id} >
-                    <CardMedia >
-		      <img src={data.url} />						
+                    <CardMedia >                      
+		      <img src={data.url}/>
 	            </CardMedia>
                   </Link>
-                  <CardText style={{ fontSize: '16px', color: 'yellow' }}>Caption:{data.caption}</CardText>
-                </Card>
+                </div>
             );
         });
 
         var token = Auth.getToken();
         var hasura_id  = token.split(' ')[1];
         return (
-            <Card className="container">           
+            <div className="galleryContainer">           
               {Auth.isUserAuthenticated() && this.props.user_id === hasura_id ?                  
                   (              <div className="addButton">
                                  <Link to = {'/addimage/' + hasura_id} >Add</Link>
@@ -36,7 +36,7 @@ class Gallery extends React.Component {
               }
                 
 	        {data}
-	    </Card>
+	    </div>
 	);
     }
 }

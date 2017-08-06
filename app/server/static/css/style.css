@@ -1,6 +1,11 @@
 body {
   margin: 0;
   font-size: 16px;
+  background-color: #FFEEAD;
+}
+
+p {
+  font-size: 15px;
 }
 
 a {
@@ -14,13 +19,21 @@ a:hover {
   color: #1976d2;
 }
 
+
+h2 {
+  color: #284B63;
+}
+
+
 .text-center {
   text-align: center;
 }
 
+
 .top-bar {
   padding: 10px 15px;
   margin-bottom: 50px;
+  background-color: #96CEB4;
 }
 .top-bar::after {
   content: '';
@@ -42,10 +55,49 @@ a:hover {
   margin: 0 8px;
 }
 
+
 .container {
   margin: 0 auto;
   text-align: center;
-  width: 700px;
+  width: 900px;
+}
+
+.dashboardContainer {
+  margin: 0 auto;
+  text-align: center;
+  width: 900px;
+  background-color: #A997C4;
+}
+
+.userRow {
+  margin: 0 auto;
+  text-align: center;
+  width: 850px;
+  background-color: #88D8B0;
+}
+
+
+
+.galleryContainer {
+  margin: 0 auto;
+  text-align: center;
+  width: 900px;
+  background-color: #A997C4;
+}
+
+
+.imageRow {
+  margin: 0 auto;
+  text-align: center;
+  width: 400px;
+  background-color: #88D8B0;
+}
+
+.imageContainer {
+  margin: 0 auto;
+  text-align: center;
+  width: 900px;
+  background-color: #FFCC5C;
 }
 
 .card-heading {

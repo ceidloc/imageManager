@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class ImageTagAdd extends React.Component {        
@@ -10,7 +10,7 @@ class ImageTagAdd extends React.Component {
         var handleClick = this.props.onSubmit;
         var data = this.props.data.map(function(data, i) {
             return (                                
-                    <button onClick = {(e)=>handleClick(data.tag_name)} key = {i}>{data.tag_name}</button>
+                    <RaisedButton onClick = {(e)=>handleClick(data.tag_name)} key = {i}>{data.tag_name}</RaisedButton>
             );
         });        
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
+import ImageTagEdit from '../containers/ImageTagEdit.jsx';
 
 const EditImage = ({
   onSubmit,
@@ -11,7 +11,10 @@ const EditImage = ({
   errors,
     image
 }) => (
-  <Card className="container">
+    <Card className="container">
+      <ImageTagEdit
+        image_id ={image.image_id}
+      />
     <form action="/" onSubmit={onSubmit}>
       <h2 className="card-heading">Edit Image</h2>
 

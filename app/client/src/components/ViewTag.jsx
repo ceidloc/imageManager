@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-
-
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ViewTag extends React.Component {        
     
@@ -10,13 +9,15 @@ class ViewTag extends React.Component {
         var handleClick = this.props.onSubmit;
         var data = this.props.data.map(function(data, i) {
             return (                                
-                    <button key = {i}>{data.tag_name}</button>
+                    <RaisedButton key = {i}>{data.tag_name}</RaisedButton>
             );
         });        
 
         return (
 	    <Card className="container">
-	      {data}	      
+              <CardText><RaisedButton primary>Tags:</RaisedButton>
+	        {data}
+              </CardText>
 	    </Card>
 	);
     }

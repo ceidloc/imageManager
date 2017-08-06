@@ -9,7 +9,7 @@ class FilterByTag extends React.Component {
     
     render() {
         return  (
-            <Card className="container">
+            <Card className="filterContainer">
               <form  action = '/' onSubmit={this.props.onSubmit}>
                 <h2 className="card-heading">Gallery</h2>
                 <div className="field-line">

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
-
-
+import Auth from '../modules/Auth';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Dashboard extends React.Component {        
     
@@ -18,9 +18,14 @@ class Dashboard extends React.Component {
             );
         });
 
+        var token = Auth.getToken();
+        var hasura_id  = token.split(' ')[1];
         return (
-	    <Card className="container">	      
-	      {data}	      
+	    <Card className="dashboardContainer">
+                <Link to = {'/addimage/' + hasura_id} >
+                  Add a new image
+                </Link>                  
+	      {data}              
 	    </Card>
 	);
     }

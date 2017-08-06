@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import EditImage from '../components/EditImage.jsx';
-import ImageTagEdit from '../containers/ImageTagEdit.jsx';
 import Auth from '../modules/Auth';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
@@ -140,9 +139,6 @@ class EditImagePage extends React.Component {
               onChange={this.changeImage}
               errors={this.state.errors}
               image={this.state.image}
-            />
-            <ImageTagEdit
-              image_id ={this.state.image.image_id}
             />
           </Card>
       ));

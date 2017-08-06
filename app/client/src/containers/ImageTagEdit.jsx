@@ -236,16 +236,16 @@ class ImageTagEdit extends React.Component {
    */
   render() {
       return ((
-          <Card className="container">
-            <CardTitle title= "tags"/>
+          <Card className="container">            
             <CardText style={{ fontSize: '16px', color: 'green' }}>
+              Tags:
             </CardText>
             <ImageTagEditForm
               onSubmit={this.deleteTag}
               data={this.state.tagged}
             />
-            <CardTitle title= "add tags"/>
             <CardText style={{ fontSize: '16px', color: 'blue' }}>
+              Add Tags:
             </CardText>
             <ImageTagEditForm
               onSubmit={this.addTag}

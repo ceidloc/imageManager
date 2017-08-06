@@ -35366,7 +35366,7 @@
 	        _react2.default.createElement(
 	          _reactRouter.IndexLink,
 	          { to: '/' },
-	          'React App'
+	          'Home'
 	        )
 	      ),
 	      _Auth2.default.isUserAuthenticated() ? _react2.default.createElement(
@@ -35483,23 +35483,61 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(339);
+
 	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var styles = {
+		button: {
+			margin: 12
+		}
+	};
 	var HomePage = function HomePage() {
-	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(_Card.CardTitle, { title: 'React Application', subtitle: 'This is the home page.' })
-	  );
+		return _react2.default.createElement(
+			'div',
+			null,
+			_react2.default.createElement(
+				'div',
+				{ className: 'container' },
+				_react2.default.createElement('br', null),
+				_react2.default.createElement(_Card.CardTitle, { title: 'Image Manager', subtitle: 'App to share images and keep track of them with tags.' }),
+				_react2.default.createElement(
+					_reactRouter.Link,
+					{ to: '/login' },
+					_react2.default.createElement(_RaisedButton2.default, {
+						label: 'Log in',
+						labelPosition: 'before',
+						style: styles.button,
+						containerElement: 'label'
+					})
+				),
+				' ',
+				'  ',
+				_react2.default.createElement(
+					_reactRouter.Link,
+					{ to: '/signup' },
+					_react2.default.createElement(_RaisedButton2.default, {
+						label: 'Sign up',
+						labelPosition: 'before',
+						style: styles.button,
+						containerElement: 'label'
+					})
+				)
+			)
+		);
 	};
 
 	exports.default = HomePage;
@@ -41252,6 +41290,14 @@
 
 	var _Card = __webpack_require__(400);
 
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41290,9 +41336,16 @@
 	                );
 	            });
 
+	            var token = _Auth2.default.getToken();
+	            var hasura_id = token.split(' ')[1];
 	            return _react2.default.createElement(
 	                _Card.Card,
-	                { className: 'container' },
+	                { className: 'dashboardContainer' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/addimage/' + hasura_id },
+	                    'Add a new image'
+	                ),
 	                data
 	            );
 	        }
@@ -44156,8 +44209,14 @@
 	        value: function render() {
 	            var data = this.props.data.map(function (data) {
 	                return _react2.default.createElement(
-	                    _Card.Card,
+	                    'div',
 	                    { className: 'imageRow', key: data.image_id },
+	                    _react2.default.createElement(
+	                        _Card.CardText,
+	                        { style: { fontSize: '16px', color: 'white' } },
+	                        'Caption: ',
+	                        data.caption
+	                    ),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/viewimage/' + data.image_id },
@@ -44166,12 +44225,6 @@
 	                            null,
 	                            _react2.default.createElement('img', { src: data.url })
 	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        _Card.CardText,
-	                        { style: { fontSize: '16px', color: 'yellow' } },
-	                        'Caption:',
-	                        data.caption
 	                    )
 	                );
 	            });
@@ -44179,8 +44232,8 @@
 	            var token = _Auth2.default.getToken();
 	            var hasura_id = token.split(' ')[1];
 	            return _react2.default.createElement(
-	                _Card.Card,
-	                { className: 'container' },
+	                'div',
+	                { className: 'galleryContainer' },
 	                _Auth2.default.isUserAuthenticated() && this.props.user_id === hasura_id ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'addButton' },
@@ -44250,7 +44303,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _Card.Card,
-	        { className: 'container' },
+	        { className: 'filterContainer' },
 	        _react2.default.createElement(
 	          'form',
 	          { action: '/', onSubmit: this.props.onSubmit },
@@ -44565,10 +44618,6 @@
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 
-	var _ViewTagPage = __webpack_require__(484);
-
-	var _ViewTagPage2 = _interopRequireDefault(_ViewTagPage);
-
 	var _Card = __webpack_require__(400);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44640,8 +44689,7 @@
 	      return _react2.default.createElement(
 	        _Card.Card,
 	        { className: 'container' },
-	        _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id }),
-	        _react2.default.createElement(_ViewTagPage2.default, { data: this.state.data, image_id: this.props.params.image_id })
+	        _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id })
 	      );
 	    }
 	  }]);
@@ -44675,6 +44723,14 @@
 
 	var _reactRouter = __webpack_require__(339);
 
+	var _ViewTagPage = __webpack_require__(484);
+
+	var _ViewTagPage2 = _interopRequireDefault(_ViewTagPage);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44700,31 +44756,34 @@
 	            var hasura_id = token.split(' ')[1];
 	            return _react2.default.createElement(
 	                _Card.Card,
-	                { className: 'container' },
-	                _react2.default.createElement(_Card.CardTitle, { title: this.props.data.caption }),
+	                { className: 'imageContainer' },
+	                _react2.default.createElement(_Card.CardTitle, { title: "Caption: " + this.props.data.caption }),
+	                _react2.default.createElement(_ViewTagPage2.default, { data: this.props.data, image_id: this.props.image_id }),
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    { style: { fontSize: '16px', color: 'green' } },
+	                    'Description:',
+	                    this.props.data.description
+	                ),
 	                _react2.default.createElement(
 	                    _Card.CardMedia,
 	                    null,
 	                    _react2.default.createElement('img', { src: this.props.data.url })
 	                ),
-	                _react2.default.createElement(
-	                    _Card.CardText,
-	                    { style: { fontSize: '16px', color: 'green' } },
-	                    this.props.data.description
-	                ),
+	                _react2.default.createElement('hr', null),
 	                _Auth2.default.isUserAuthenticated() && this.props.data.user_id == hasura_id ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'addButton' },
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/editimage/' + this.props.data.image_id },
-	                        'edit'
+	                        _react2.default.createElement(_RaisedButton2.default, { primary: true, label: 'edit' })
 	                    ),
 	                    _react2.default.createElement('br', null),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/deleteimage/' + hasura_id + '/' + this.props.data.image_id },
-	                        'delete'
+	                        _react2.default.createElement(_RaisedButton2.default, { secondary: true, label: 'delete' })
 	                    )
 	                ) : _react2.default.createElement('div', { className: 'addButton' })
 	            );
@@ -45021,14 +45080,20 @@
 	            return _react2.default.createElement(
 	                _Card.Card,
 	                { className: 'container' },
-	                _react2.default.createElement(_Card.CardTitle, { title: 'tags' }),
-	                _react2.default.createElement(_Card.CardText, { style: { fontSize: '16px', color: 'green' } }),
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    { style: { fontSize: '16px', color: 'green' } },
+	                    'Tags:'
+	                ),
 	                _react2.default.createElement(_ImageTagEditForm2.default, {
 	                    onSubmit: this.deleteTag,
 	                    data: this.state.tagged
 	                }),
-	                _react2.default.createElement(_Card.CardTitle, { title: 'add tags' }),
-	                _react2.default.createElement(_Card.CardText, { style: { fontSize: '16px', color: 'blue' } }),
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    { style: { fontSize: '16px', color: 'blue' } },
+	                    'Add Tags:'
+	                ),
 	                _react2.default.createElement(_ImageTagEditForm2.default, {
 	                    onSubmit: this.addTag,
 	                    data: this.state.untagged
@@ -45066,6 +45131,10 @@
 
 	var _Card = __webpack_require__(400);
 
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45089,7 +45158,7 @@
 	            var handleClick = this.props.onSubmit;
 	            var data = this.props.data.map(function (data, i) {
 	                return _react2.default.createElement(
-	                    'button',
+	                    _RaisedButton2.default,
 	                    { onClick: function onClick(e) {
 	                            return handleClick(data.tag_name);
 	                        }, key: i },
@@ -45247,6 +45316,10 @@
 
 	var _Card = __webpack_require__(400);
 
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45270,7 +45343,7 @@
 	            var handleClick = this.props.onSubmit;
 	            var data = this.props.data.map(function (data, i) {
 	                return _react2.default.createElement(
-	                    'button',
+	                    _RaisedButton2.default,
 	                    { key: i },
 	                    data.tag_name
 	                );
@@ -45279,7 +45352,16 @@
 	            return _react2.default.createElement(
 	                _Card.Card,
 	                { className: 'container' },
-	                data
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    null,
+	                    _react2.default.createElement(
+	                        _RaisedButton2.default,
+	                        { primary: true },
+	                        'Tags:'
+	                    ),
+	                    data
+	                )
 	            );
 	        }
 	    }]);
@@ -45308,10 +45390,6 @@
 	var _EditImage = __webpack_require__(487);
 
 	var _EditImage2 = _interopRequireDefault(_EditImage);
-
-	var _ImageTagEdit = __webpack_require__(482);
-
-	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 
 	var _Auth = __webpack_require__(398);
 
@@ -45477,9 +45555,6 @@
 	          onChange: this.changeImage,
 	          errors: this.state.errors,
 	          image: this.state.image
-	        }),
-	        _react2.default.createElement(_ImageTagEdit2.default, {
-	          image_id: this.state.image.image_id
 	        })
 	      );
 	    }
@@ -45520,6 +45595,10 @@
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
+	var _ImageTagEdit = __webpack_require__(482);
+
+	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var EditImage = function EditImage(_ref) {
@@ -45530,6 +45609,9 @@
 	  return _react2.default.createElement(
 	    _Card.Card,
 	    { className: 'container' },
+	    _react2.default.createElement(_ImageTagEdit2.default, {
+	      image_id: image.image_id
+	    }),
 	    _react2.default.createElement(
 	      'form',
 	      { action: '/', onSubmit: onSubmit },

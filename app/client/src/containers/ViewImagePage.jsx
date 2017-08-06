@@ -2,7 +2,6 @@ import React from 'react';
 import Auth from '../modules/Auth';
 import ViewImage from '../components/ViewImage.jsx';
 import ImageTagEdit from '../containers/ImageTagEdit.jsx';
-import ViewTagPage from '../containers/ViewTagPage.jsx';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 class ViewImagePage extends React.Component {
@@ -51,9 +50,8 @@ class ViewImagePage extends React.Component {
         var token = Auth.getToken();
         var hasura_id  = token.split(' ')[1];
       return (
-          <Card className = "container">            
+          <Card className = "container">
             <ViewImage data={this.state.data}  image_id = {this.props.params.image_id}/>
-            <ViewTagPage data={this.state.data} image_id = {this.props.params.image_id}/>
           </Card>
       );
   }

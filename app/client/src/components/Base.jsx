@@ -4,10 +4,11 @@ import Auth from '../modules/Auth';
 
 
 const Base = ({ children }) => (
+
   <div>
     <div className="top-bar">
       <div className="top-bar-left">
-        <IndexLink to="/">React App</IndexLink>
+        <IndexLink to="/">Home</IndexLink>
       </div>
 
       {Auth.isUserAuthenticated() ? (
@@ -26,7 +27,7 @@ const Base = ({ children }) => (
     { /* child component will be rendered here */ }
     {children}
 
-  </div>
+    </div>
 );
 
 Base.propTypes = {
