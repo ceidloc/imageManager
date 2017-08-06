@@ -51,27 +51,49 @@ class GalleryPage extends React.Component {
 
         event.preventDefault();
 
-      var token = Auth.getToken();
-      token = token.split(' ')[0];
-      //const user_id = encodeURIComponent("38");
+        var token = Auth.getToken();
+        token = token.split(' ')[0];
+        //const user_id = encodeURIComponent("38");
         const user_id = encodeURIComponent(this.props.params.user_id);
         const tag_name = encodeURIComponent(this.state.filterTag);
-        const formData = `user_id=${user_id}&tag_name=${tag_name}`;
-    
-    const xhr = new XMLHttpRequest();
-    xhr.open('post', '/api/filterByTag');
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-      if (xhr.status === 200) {
-        this.setState({
-          data: xhr.response
-        });
-      }
-    });
-//      console.error(formData);
-    xhr.send(formData);
+
+        if (this.state.filterTag === "") {
+            // if no tag is specified
+            const formData = `user_id=${user_id}`;
+            const url = "/api/gallery";
+            const xhr = new XMLHttpRequest();
+            xhr.open('post', url);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            xhr.responseType = 'json';
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 200) {
+                    this.setState({
+                        data: xhr.response
+                    });
+                }
+            });
+            //      console.error(formData);
+            xhr.send(formData);
+        }else {
+            //if tag is specified
+            const formData = `user_id=${user_id}&tag_name=${tag_name}`;
+            const url = "/api/filterByTag";
+            const xhr = new XMLHttpRequest();
+            xhr.open('post', url);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+            xhr.responseType = 'json';
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 200) {
+                    this.setState({
+                        data: xhr.response
+                    });
+                }
+            });
+            //      console.error(formData);
+            xhr.send(formData);
+        }        
     }
 
     changeTag(event) {

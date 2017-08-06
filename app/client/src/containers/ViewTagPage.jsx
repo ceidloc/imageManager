@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Auth from '../modules/Auth';
 import { Card, CardText } from 'material-ui/Card';
-import ImageTagEditForm from '../components/ImageTagEditForm.jsx';
+import ViewTag from '../components/ViewTag.jsx';
 
 class ViewTagPage extends React.Component {
 
@@ -62,7 +62,7 @@ class ViewTagPage extends React.Component {
   render() {
       return ((
           <Card name="container">
-            <ImageTagEditForm              
+            <ViewTag              
               data={this.state.tagged}
             />            
           </Card>

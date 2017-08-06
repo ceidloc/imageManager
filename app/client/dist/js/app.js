@@ -35253,7 +35253,7 @@
 
 	var _ViewImagePage2 = _interopRequireDefault(_ViewImagePage);
 
-	var _EditImagePage = __webpack_require__(482);
+	var _EditImagePage = __webpack_require__(486);
 
 	var _EditImagePage2 = _interopRequireDefault(_EditImagePage);
 
@@ -43934,7 +43934,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -43966,117 +43966,139 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var GalleryPage = function (_React$Component) {
-	  _inherits(GalleryPage, _React$Component);
+	    _inherits(GalleryPage, _React$Component);
 
-	  /**
-	   * Class constructor.
-	   */
-	  function GalleryPage(props) {
-	    _classCallCheck(this, GalleryPage);
+	    /**
+	     * Class constructor.
+	     */
+	    function GalleryPage(props) {
+	        _classCallCheck(this, GalleryPage);
 
-	    var _this = _possibleConstructorReturn(this, (GalleryPage.__proto__ || Object.getPrototypeOf(GalleryPage)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (GalleryPage.__proto__ || Object.getPrototypeOf(GalleryPage)).call(this, props));
 
-	    _this.state = {
-	      data: [],
-	      filterTag: ''
-	    };
-	    _this.filterByTag = _this.filterByTag.bind(_this);
-	    _this.changeTag = _this.changeTag.bind(_this);
-	    return _this;
-	  }
-
-	  /**
-	   * This method will be executed after initial rendering.
-	   */
-
-
-	  _createClass(GalleryPage, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const user_id = encodeURIComponent("38");
-	      var user_id = encodeURIComponent(this.props.params.user_id);
-	      var formData = 'user_id=' + user_id;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/gallery');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          _this2.setState({
-	            data: xhr.response
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'filterByTag',
-	    value: function filterByTag(event) {
-	      var _this3 = this;
-
-	      event.preventDefault();
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const user_id = encodeURIComponent("38");
-	      var user_id = encodeURIComponent(this.props.params.user_id);
-	      var tag_name = encodeURIComponent(this.state.filterTag);
-	      var formData = 'user_id=' + user_id + '&tag_name=' + tag_name;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/filterByTag');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          _this3.setState({
-	            data: xhr.response
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'changeTag',
-	    value: function changeTag(event) {
-	      var field = event.target.name;
-	      var tag = event.target.value;
-
-	      this.setState({
-	        filterTag: tag
-	      });
+	        _this.state = {
+	            data: [],
+	            filterTag: ''
+	        };
+	        _this.filterByTag = _this.filterByTag.bind(_this);
+	        _this.changeTag = _this.changeTag.bind(_this);
+	        return _this;
 	    }
 
 	    /**
-	     * Render the component.
+	     * This method will be executed after initial rendering.
 	     */
 
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _Card.Card,
-	        { className: 'container' },
-	        _react2.default.createElement(_FilterByTag2.default, {
-	          filterTag: this.state.filterTag,
-	          onChange: this.changeTag,
-	          onSubmit: this.filterByTag
-	        }),
-	        _react2.default.createElement(_Gallery2.default, { data: this.state.data, user_id: this.props.params.user_id })
-	      );
-	    }
-	  }]);
 
-	  return GalleryPage;
+	    _createClass(GalleryPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+	            //const user_id = encodeURIComponent("38");
+	            var user_id = encodeURIComponent(this.props.params.user_id);
+	            var formData = 'user_id=' + user_id;
+
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/gallery');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    _this2.setState({
+	                        data: xhr.response
+	                    });
+	                }
+	            });
+	            //      console.error(formData);
+	            xhr.send(formData);
+	        }
+	    }, {
+	        key: 'filterByTag',
+	        value: function filterByTag(event) {
+	            var _this3 = this;
+
+	            event.preventDefault();
+
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+	            //const user_id = encodeURIComponent("38");
+	            var user_id = encodeURIComponent(this.props.params.user_id);
+	            var tag_name = encodeURIComponent(this.state.filterTag);
+
+	            if (this.state.filterTag === "") {
+	                // if no tag is specified
+	                var formData = 'user_id=' + user_id;
+	                var url = "/api/gallery";
+	                var xhr = new XMLHttpRequest();
+	                xhr.open('post', url);
+	                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	                xhr.responseType = 'json';
+	                xhr.addEventListener('load', function () {
+	                    if (xhr.status === 200) {
+	                        _this3.setState({
+	                            data: xhr.response
+	                        });
+	                    }
+	                });
+	                //      console.error(formData);
+	                xhr.send(formData);
+	            } else {
+	                //if tag is specified
+	                var _formData = 'user_id=' + user_id + '&tag_name=' + tag_name;
+	                var _url = "/api/filterByTag";
+	                var _xhr = new XMLHttpRequest();
+	                _xhr.open('post', _url);
+	                _xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	                _xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	                _xhr.responseType = 'json';
+	                _xhr.addEventListener('load', function () {
+	                    if (_xhr.status === 200) {
+	                        _this3.setState({
+	                            data: _xhr.response
+	                        });
+	                    }
+	                });
+	                //      console.error(formData);
+	                _xhr.send(_formData);
+	            }
+	        }
+	    }, {
+	        key: 'changeTag',
+	        value: function changeTag(event) {
+	            var field = event.target.name;
+	            var tag = event.target.value;
+
+	            this.setState({
+	                filterTag: tag
+	            });
+	        }
+
+	        /**
+	         * Render the component.
+	         */
+
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                _react2.default.createElement(_FilterByTag2.default, {
+	                    filterTag: this.state.filterTag,
+	                    onChange: this.changeTag,
+	                    onSubmit: this.filterByTag
+	                }),
+	                _react2.default.createElement(_Gallery2.default, { data: this.state.data, user_id: this.props.params.user_id })
+	            );
+	        }
+	    }]);
+
+	    return GalleryPage;
 	}(_react2.default.Component);
 
 	exports.default = GalleryPage;
@@ -44532,9 +44554,13 @@
 
 	var _ViewImage2 = _interopRequireDefault(_ViewImage);
 
-	var _ImageTagEdit = __webpack_require__(484);
+	var _ImageTagEdit = __webpack_require__(482);
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
+
+	var _ViewTagPage = __webpack_require__(484);
+
+	var _ViewTagPage2 = _interopRequireDefault(_ViewTagPage);
 
 	var _Card = __webpack_require__(400);
 
@@ -44602,13 +44628,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var token = _Auth2.default.getToken();
+	      var hasura_id = token.split(' ')[1];
 	      return _react2.default.createElement(
 	        _Card.Card,
 	        { className: 'container' },
 	        _react2.default.createElement(_ViewImage2.default, { data: this.state.data, image_id: this.props.params.image_id }),
-	        _react2.default.createElement(_ImageTagEdit2.default, {
-	          image_id: this.props.params.image_id
-	        })
+	        _react2.default.createElement(_ViewTagPage2.default, { data: this.state.data, image_id: this.props.params.image_id })
 	      );
 	    }
 	  }]);
@@ -44704,311 +44730,6 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _EditImage = __webpack_require__(483);
-
-	var _EditImage2 = _interopRequireDefault(_EditImage);
-
-	var _ImageTagEdit = __webpack_require__(484);
-
-	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
-
-	var _Auth = __webpack_require__(398);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _Card = __webpack_require__(400);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var EditImagePage = function (_React$Component) {
-	  _inherits(EditImagePage, _React$Component);
-
-	  /**
-	   * Class constructor.
-	   */
-	  function EditImagePage(props, context) {
-	    _classCallCheck(this, EditImagePage);
-
-	    // set the initial component state
-	    var _this = _possibleConstructorReturn(this, (EditImagePage.__proto__ || Object.getPrototypeOf(EditImagePage)).call(this, props, context));
-
-	    _this.state = {
-	      errors: {},
-	      image: {
-	        url: '',
-	        caption: '',
-	        description: '',
-	        image_id: _this.props.params.image_id,
-	        user_id: ''
-	      }
-	    };
-
-	    _this.processForm = _this.processForm.bind(_this);
-	    _this.changeImage = _this.changeImage.bind(_this);
-	    return _this;
-	  }
-
-	  /*
-	    loading existing image data
-	    */
-
-	  _createClass(EditImagePage, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const image_id = encodeURIComponent("38");
-	      var image_id = encodeURIComponent(this.props.params.image_id);
-	      var formData = 'image_id=' + image_id;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/viewimage');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          var data = xhr.response;
-	          console.error("xhr.response:");
-	          console.error(data);
-	          var image = _this2.state.image;
-	          image.url = data.url;
-	          image.caption = data.caption;
-	          image.description = data.description;
-	          image.user_id = data.user_id;
-	          _this2.setState({
-	            image: image
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
-
-	    /**
-	     * Process the form.
-	     *
-	     * @param {object} event - the JavaScript event object
-	     */
-
-	  }, {
-	    key: 'processForm',
-	    value: function processForm(event) {
-	      var _this3 = this;
-
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
-
-	      // create a string for an HTTP body message
-	      var url = encodeURIComponent(this.state.image.url);
-	      var caption = encodeURIComponent(this.state.image.caption);
-	      var description = encodeURIComponent(this.state.image.description);
-	      var image_id = encodeURIComponent(this.state.image.image_id);
-	      var formData = 'url=' + url + '&caption=' + caption + '&description=' + description + '&image_id=' + image_id;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/editimage');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-
-	          // change the component-container state
-	          _this3.setState({
-	            errors: {}
-	          });
-
-	          // set a message
-	          // make a redirect
-	          console.error("fuewifn: " + _this3.state.image.user_id);
-	          _this3.context.router.replace('/gallery/' + _this3.state.image.user_id);
-	        } else {
-	          // failure
-
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-
-	          _this3.setState({
-	            errors: errors
-	          });
-	        }
-	      });
-	      xhr.send(formData);
-	    }
-	  }, {
-	    key: 'changeImage',
-	    value: function changeImage(event) {
-	      var field = event.target.name;
-	      var image = this.state.image;
-	      image[field] = event.target.value;
-
-	      this.setState({
-	        image: image
-	      });
-	    }
-
-	    /**
-	     * Render the component.
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _Card.Card,
-	        { name: 'container' },
-	        _react2.default.createElement(_EditImage2.default, {
-	          onSubmit: this.processForm,
-	          onChange: this.changeImage,
-	          errors: this.state.errors,
-	          image: this.state.image
-	        }),
-	        _react2.default.createElement(_ImageTagEdit2.default, {
-	          image_id: this.state.image.image_id
-	        })
-	      );
-	    }
-	  }]);
-
-	  return EditImagePage;
-	}(_react2.default.Component);
-
-	EditImagePage.contextTypes = {
-	  router: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = EditImagePage;
-
-/***/ }),
-/* 483 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(339);
-
-	var _Card = __webpack_require__(400);
-
-	var _RaisedButton = __webpack_require__(461);
-
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
-
-	var _TextField = __webpack_require__(463);
-
-	var _TextField2 = _interopRequireDefault(_TextField);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var EditImage = function EditImage(_ref) {
-	  var onSubmit = _ref.onSubmit,
-	      onChange = _ref.onChange,
-	      errors = _ref.errors,
-	      image = _ref.image;
-	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(
-	      'form',
-	      { action: '/', onSubmit: onSubmit },
-	      _react2.default.createElement(
-	        'h2',
-	        { className: 'card-heading' },
-	        'Edit Image'
-	      ),
-	      errors.summary && _react2.default.createElement(
-	        'p',
-	        { className: 'error-message' },
-	        errors.summary
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: 'ImageUrl',
-	          name: 'url',
-	          errorText: errors.url,
-	          onChange: onChange,
-	          value: image.url
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: 'Caption',
-	          name: 'caption',
-	          errorText: errors.email,
-	          onChange: onChange,
-	          value: image.caption
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: 'Description',
-	          name: 'description',
-	          onChange: onChange,
-	          errorText: errors.description,
-	          value: image.description
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'button-line' },
-	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Update Image', primary: true })
-	      )
-	    )
-	  );
-	};
-
-	EditImage.propTypes = {
-	  onSubmit: _react.PropTypes.func.isRequired,
-	  onChange: _react.PropTypes.func.isRequired,
-	  errors: _react.PropTypes.object.isRequired,
-	  image: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = EditImage;
-
-/***/ }),
-/* 484 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
@@ -45024,7 +44745,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _ImageTagEditForm = __webpack_require__(485);
+	var _ImageTagEditForm = __webpack_require__(483);
 
 	var _ImageTagEditForm2 = _interopRequireDefault(_ImageTagEditForm);
 
@@ -45313,7 +45034,7 @@
 	exports.default = ImageTagEdit;
 
 /***/ }),
-/* 485 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45375,6 +45096,490 @@
 	}(_react2.default.Component);
 
 	exports.default = ImageTagAdd;
+
+/***/ }),
+/* 484 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Card = __webpack_require__(400);
+
+	var _ViewTag = __webpack_require__(485);
+
+	var _ViewTag2 = _interopRequireDefault(_ViewTag);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewTagPage = function (_React$Component) {
+	  _inherits(ViewTagPage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function ViewTagPage(props, context) {
+	    _classCallCheck(this, ViewTagPage);
+
+	    // set the initial component state
+	    var _this = _possibleConstructorReturn(this, (ViewTagPage.__proto__ || Object.getPrototypeOf(ViewTagPage)).call(this, props, context));
+
+	    _this.state = {
+	      tagged: []
+	    };
+	    return _this;
+	  }
+
+	  /*
+	    loading existing image data
+	    */
+
+	  _createClass(ViewTagPage, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      console.error("in will mount");
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const image_id = encodeURIComponent("38");
+	      var image_id = encodeURIComponent(this.props.image_id);
+	      var formData = 'image_id=' + image_id;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/getImageTags');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          var data = xhr.response;
+	          _this2.setState({
+	            tagged: data
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Process the form.
+	     *
+	     * @param {object} event - the JavaScript event object
+	     */
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { name: 'container' },
+	        _react2.default.createElement(_ViewTag2.default, {
+	          data: this.state.tagged
+	        })
+	      );
+	    }
+	  }]);
+
+	  return ViewTagPage;
+	}(_react2.default.Component);
+
+	ViewTagPage.contextTypes = {
+	  router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = ViewTagPage;
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewTag = function (_React$Component) {
+	    _inherits(ViewTag, _React$Component);
+
+	    function ViewTag() {
+	        _classCallCheck(this, ViewTag);
+
+	        return _possibleConstructorReturn(this, (ViewTag.__proto__ || Object.getPrototypeOf(ViewTag)).apply(this, arguments));
+	    }
+
+	    _createClass(ViewTag, [{
+	        key: 'render',
+	        value: function render() {
+	            var handleClick = this.props.onSubmit;
+	            var data = this.props.data.map(function (data, i) {
+	                return _react2.default.createElement(
+	                    'button',
+	                    { key: i },
+	                    data.tag_name
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                data
+	            );
+	        }
+	    }]);
+
+	    return ViewTag;
+	}(_react2.default.Component);
+
+	exports.default = ViewTag;
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EditImage = __webpack_require__(487);
+
+	var _EditImage2 = _interopRequireDefault(_EditImage);
+
+	var _ImageTagEdit = __webpack_require__(482);
+
+	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Card = __webpack_require__(400);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EditImagePage = function (_React$Component) {
+	  _inherits(EditImagePage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function EditImagePage(props, context) {
+	    _classCallCheck(this, EditImagePage);
+
+	    // set the initial component state
+	    var _this = _possibleConstructorReturn(this, (EditImagePage.__proto__ || Object.getPrototypeOf(EditImagePage)).call(this, props, context));
+
+	    _this.state = {
+	      errors: {},
+	      image: {
+	        url: '',
+	        caption: '',
+	        description: '',
+	        image_id: _this.props.params.image_id,
+	        user_id: ''
+	      }
+	    };
+
+	    _this.processForm = _this.processForm.bind(_this);
+	    _this.changeImage = _this.changeImage.bind(_this);
+	    return _this;
+	  }
+
+	  /*
+	    loading existing image data
+	    */
+
+	  _createClass(EditImagePage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const image_id = encodeURIComponent("38");
+	      var image_id = encodeURIComponent(this.props.params.image_id);
+	      var formData = 'image_id=' + image_id;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/viewimage');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          var data = xhr.response;
+	          console.error("xhr.response:");
+	          console.error(data);
+	          var image = _this2.state.image;
+	          image.url = data.url;
+	          image.caption = data.caption;
+	          image.description = data.description;
+	          image.user_id = data.user_id;
+	          _this2.setState({
+	            image: image
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Process the form.
+	     *
+	     * @param {object} event - the JavaScript event object
+	     */
+
+	  }, {
+	    key: 'processForm',
+	    value: function processForm(event) {
+	      var _this3 = this;
+
+	      // prevent default action. in this case, action is the form submission event
+	      event.preventDefault();
+
+	      // create a string for an HTTP body message
+	      var url = encodeURIComponent(this.state.image.url);
+	      var caption = encodeURIComponent(this.state.image.caption);
+	      var description = encodeURIComponent(this.state.image.description);
+	      var image_id = encodeURIComponent(this.state.image.image_id);
+	      var formData = 'url=' + url + '&caption=' + caption + '&description=' + description + '&image_id=' + image_id;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+
+	      // create an AJAX request
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/editimage');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          // success
+
+	          // change the component-container state
+	          _this3.setState({
+	            errors: {}
+	          });
+
+	          // set a message
+	          // make a redirect
+	          console.error("fuewifn: " + _this3.state.image.user_id);
+	          _this3.context.router.replace('/gallery/' + _this3.state.image.user_id);
+	        } else {
+	          // failure
+
+	          var errors = xhr.response.errors ? xhr.response.errors : {};
+	          errors.summary = xhr.response.message;
+
+	          _this3.setState({
+	            errors: errors
+	          });
+	        }
+	      });
+	      xhr.send(formData);
+	    }
+	  }, {
+	    key: 'changeImage',
+	    value: function changeImage(event) {
+	      var field = event.target.name;
+	      var image = this.state.image;
+	      image[field] = event.target.value;
+
+	      this.setState({
+	        image: image
+	      });
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { name: 'container' },
+	        _react2.default.createElement(_EditImage2.default, {
+	          onSubmit: this.processForm,
+	          onChange: this.changeImage,
+	          errors: this.state.errors,
+	          image: this.state.image
+	        }),
+	        _react2.default.createElement(_ImageTagEdit2.default, {
+	          image_id: this.state.image.image_id
+	        })
+	      );
+	    }
+	  }]);
+
+	  return EditImagePage;
+	}(_react2.default.Component);
+
+	EditImagePage.contextTypes = {
+	  router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = EditImagePage;
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(461);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _TextField = __webpack_require__(463);
+
+	var _TextField2 = _interopRequireDefault(_TextField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var EditImage = function EditImage(_ref) {
+	  var onSubmit = _ref.onSubmit,
+	      onChange = _ref.onChange,
+	      errors = _ref.errors,
+	      image = _ref.image;
+	  return _react2.default.createElement(
+	    _Card.Card,
+	    { className: 'container' },
+	    _react2.default.createElement(
+	      'form',
+	      { action: '/', onSubmit: onSubmit },
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'card-heading' },
+	        'Edit Image'
+	      ),
+	      errors.summary && _react2.default.createElement(
+	        'p',
+	        { className: 'error-message' },
+	        errors.summary
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'ImageUrl',
+	          name: 'url',
+	          errorText: errors.url,
+	          onChange: onChange,
+	          value: image.url
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Caption',
+	          name: 'caption',
+	          errorText: errors.email,
+	          onChange: onChange,
+	          value: image.caption
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Description',
+	          name: 'description',
+	          onChange: onChange,
+	          errorText: errors.description,
+	          value: image.description
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'button-line' },
+	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Update Image', primary: true })
+	      )
+	    )
+	  );
+	};
+
+	EditImage.propTypes = {
+	  onSubmit: _react.PropTypes.func.isRequired,
+	  onChange: _react.PropTypes.func.isRequired,
+	  errors: _react.PropTypes.object.isRequired,
+	  image: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = EditImage;
 
 /***/ })
 /******/ ]);

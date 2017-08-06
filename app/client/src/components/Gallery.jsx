@@ -31,7 +31,8 @@ class Gallery extends React.Component {
                   )
                :(
                    <div className="addButton">               
-                   </div>)
+                   </div>
+               )
               }
                 
 	        {data}
