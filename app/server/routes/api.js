@@ -560,13 +560,13 @@ router.post('/deleteImageTag', (req, res) => {
 	    type: 'delete',     
 	    args: {
 	        "table":"Image_Tag",
-	        "where":[
+	        "where":
 		    {
 			"image_id": image_id,
 			"tag_name": tag_name		
-		}
-	   ]
-	}
+		    }
+	   
+	    }
         })
     };
 
