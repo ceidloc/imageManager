@@ -35257,6 +35257,10 @@
 
 	var _EditImagePage2 = _interopRequireDefault(_EditImagePage);
 
+	var _DeleteImage = __webpack_require__(488);
+
+	var _DeleteImage2 = _interopRequireDefault(_DeleteImage);
+
 	var _Auth = __webpack_require__(398);
 
 	var _Auth2 = _interopRequireDefault(_Auth);
@@ -35293,6 +35297,9 @@
 	  }, {
 	    path: '/editimage/:image_id',
 	    component: _EditImagePage2.default
+	  }, {
+	    path: '/deleteimage/:user_id/:image_id',
+	    component: _DeleteImage2.default
 	  }, {
 	    path: '/logout',
 	    onEnter: function onEnter(nextState, replace) {
@@ -44712,6 +44719,12 @@
 	                        _reactRouter.Link,
 	                        { to: '/editimage/' + this.props.data.image_id },
 	                        'edit'
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/deleteimage/' + hasura_id + '/' + this.props.data.image_id },
+	                        'delete'
 	                    )
 	                ) : _react2.default.createElement('div', { className: 'addButton' })
 	            );
@@ -45580,6 +45593,108 @@
 	};
 
 	exports.default = EditImage;
+
+/***/ }),
+/* 488 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _EditImage = __webpack_require__(487);
+
+	var _EditImage2 = _interopRequireDefault(_EditImage);
+
+	var _ImageTagEdit = __webpack_require__(482);
+
+	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Card = __webpack_require__(400);
+
+	var _reactRouter = __webpack_require__(339);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DeleteImage = function (_React$Component) {
+	    _inherits(DeleteImage, _React$Component);
+
+	    function DeleteImage() {
+	        _classCallCheck(this, DeleteImage);
+
+	        return _possibleConstructorReturn(this, (DeleteImage.__proto__ || Object.getPrototypeOf(DeleteImage)).apply(this, arguments));
+	    }
+
+	    _createClass(DeleteImage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var token = _Auth2.default.getToken();
+	            token = token.split(' ')[0];
+	            //const image_id = encodeURIComponent("38");
+	            var image_id = encodeURIComponent(this.props.params.image_id);
+	            var formData = 'image_id=' + image_id;
+
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('post', '/api/deleteimage');
+	            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	            xhr.responseType = 'json';
+	            xhr.addEventListener('load', function () {
+	                if (xhr.status === 200) {
+	                    var data = xhr.response;
+	                    console.error("xhr.response:");
+	                    console.error(data);
+	                }
+	            });
+	            //      console.error(formData);
+	            xhr.send(formData);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    null,
+	                    'Image successfully deleted!! '
+	                ),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/gallery/' + this.props.params.user_id },
+	                    'Go Back!'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return DeleteImage;
+	}(_react2.default.Component);
+
+	DeleteImage.contextTypes = {
+	    router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = DeleteImage;
 
 /***/ })
 /******/ ]);

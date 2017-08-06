@@ -22,6 +22,8 @@ class ViewImage extends React.Component {
                {Auth.isUserAuthenticated() && this.props.data.user_id == hasura_id ?                  
                   (              <div className="addButton">
                                  <Link to = {'/editimage/' + this.props.data.image_id} >edit</Link>
+                                     <br/>
+                                  <Link to = {'/deleteimage/' +hasura_id +'/' +this.props.data.image_id} >delete</Link>
                                  </div>
                   )
                :(

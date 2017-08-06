@@ -8,6 +8,7 @@ import GalleryPage from './containers/GalleryPage.jsx';
 import AddImagePage from './containers/AddImagePage.jsx';
 import ViewImagePage from './containers/ViewImagePage.jsx';
 import EditImagePage from './containers/EditImagePage.jsx';
+import DeleteImage from './containers/DeleteImage.jsx';
 import Auth from './modules/Auth';
 
 
@@ -52,6 +53,11 @@ const routes = {
       {
           path: '/editimage/:image_id',
           component: EditImagePage
+      },
+
+      {
+          path: '/deleteimage/:user_id/:image_id',
+          component: DeleteImage 
       },
 
     {
