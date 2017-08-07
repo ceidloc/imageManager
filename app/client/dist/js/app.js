@@ -35225,11 +35225,11 @@
 
 	var _HomePage2 = _interopRequireDefault(_HomePage);
 
-	var _DashboardPage = __webpack_require__(457);
+	var _DashboardPage = __webpack_require__(459);
 
 	var _DashboardPage2 = _interopRequireDefault(_DashboardPage);
 
-	var _LoginPage = __webpack_require__(459);
+	var _LoginPage = __webpack_require__(461);
 
 	var _LoginPage2 = _interopRequireDefault(_LoginPage);
 
@@ -35362,6 +35362,15 @@
 	      { className: 'top-bar' },
 	      _react2.default.createElement(
 	        'div',
+	        { className: 'top-bar-title' },
+	        _react2.default.createElement(
+	          _reactRouter.IndexLink,
+	          { to: '/' },
+	          'Image Manager'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
 	        { className: 'top-bar-left' },
 	        _react2.default.createElement(
 	          _reactRouter.IndexLink,
@@ -35483,7 +35492,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 
 	var _react = __webpack_require__(1);
@@ -35494,50 +35503,59 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var styles = {
-		button: {
-			margin: 12
-		}
+			button: {
+					margin: 12
+			}
 	};
 	var HomePage = function HomePage() {
-		return _react2.default.createElement(
-			'div',
-			null,
-			_react2.default.createElement(
-				'div',
-				{ className: 'container' },
-				_react2.default.createElement('br', null),
-				_react2.default.createElement(_Card.CardTitle, { title: 'Image Manager', subtitle: 'App to share images and keep track of them with tags.' }),
-				_react2.default.createElement(
-					_reactRouter.Link,
-					{ to: '/login' },
-					_react2.default.createElement(_RaisedButton2.default, {
-						label: 'Log in',
-						labelPosition: 'before',
-						style: styles.button,
-						containerElement: 'label'
-					})
-				),
-				' ',
-				'  ',
-				_react2.default.createElement(
-					_reactRouter.Link,
-					{ to: '/signup' },
-					_react2.default.createElement(_RaisedButton2.default, {
-						label: 'Sign up',
-						labelPosition: 'before',
-						style: styles.button,
-						containerElement: 'label'
-					})
-				)
-			)
-		);
+			return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+							'div',
+							{ className: 'container' },
+							_react2.default.createElement('br', null),
+							_react2.default.createElement(_Card.CardTitle, { title: 'Image Manager', subtitle: 'App to share images and keep track of them with tags.' }),
+							_react2.default.createElement(
+									'div',
+									{ className: 'homePageImage' },
+									_react2.default.createElement(
+											_Card.CardMedia,
+											null,
+											_react2.default.createElement('img', { src: 'http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg' })
+									)
+							),
+							_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: '/login' },
+									_react2.default.createElement(_RaisedButton2.default, {
+											label: 'Log in',
+											labelPosition: 'before',
+											style: styles.button,
+											containerElement: 'label'
+									})
+							),
+							' ',
+							'  ',
+							_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: '/signup' },
+									_react2.default.createElement(_RaisedButton2.default, {
+											label: 'Sign up',
+											labelPosition: 'before',
+											style: styles.button,
+											containerElement: 'label'
+									})
+							)
+					)
+			);
 	};
 
 	exports.default = HomePage;
@@ -41186,460 +41204,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Auth = __webpack_require__(398);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _Dashboard = __webpack_require__(458);
-
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var DashboardPage = function (_React$Component) {
-	  _inherits(DashboardPage, _React$Component);
-
-	  /**
-	   * Class constructor.
-	   */
-	  function DashboardPage(props) {
-	    _classCallCheck(this, DashboardPage);
-
-	    var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
-
-	    _this.state = {
-	      data: []
-	    };
-	    return _this;
-	  }
-
-	  /**
-	   * This method will be executed after initial rendering.
-	   */
-
-
-	  _createClass(DashboardPage, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('get', '/api/dashboard');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          _this2.setState({
-	            data: xhr.response
-	          });
-	        }
-	      });
-	      xhr.send();
-	    }
-
-	    /**
-	     * Render the component.
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_Dashboard2.default, { data: this.state.data });
-	    }
-	  }]);
-
-	  return DashboardPage;
-	}(_react2.default.Component);
-
-	exports.default = DashboardPage;
-
-/***/ }),
-/* 458 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(339);
-
-	var _Card = __webpack_require__(400);
-
-	var _Auth = __webpack_require__(398);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _RaisedButton = __webpack_require__(461);
-
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Dashboard = function (_React$Component) {
-	    _inherits(Dashboard, _React$Component);
-
-	    function Dashboard() {
-	        _classCallCheck(this, Dashboard);
-
-	        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
-	    }
-
-	    _createClass(Dashboard, [{
-	        key: 'render',
-	        value: function render() {
-	            var data = this.props.data.map(function (data) {
-	                return _react2.default.createElement(
-	                    _Card.Card,
-	                    { className: 'userRow', key: data.user_id },
-	                    _react2.default.createElement(_Card.CardTitle, { title: data.name }),
-	                    _react2.default.createElement(
-	                        _Card.CardText,
-	                        { style: { fontSize: '16px', color: 'green' } },
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/gallery/' + data.user_id },
-	                            'Images:',
-	                            data.no_of_images
-	                        )
-	                    )
-	                );
-	            });
-
-	            var token = _Auth2.default.getToken();
-	            var hasura_id = token.split(' ')[1];
-	            return _react2.default.createElement(
-	                _Card.Card,
-	                { className: 'dashboardContainer' },
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/addimage/' + hasura_id },
-	                    'Add a new image'
-	                ),
-	                data
-	            );
-	        }
-	    }]);
-
-	    return Dashboard;
-	}(_react2.default.Component);
-
-	exports.default = Dashboard;
-
-/***/ }),
-/* 459 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Auth = __webpack_require__(398);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _LoginForm = __webpack_require__(460);
-
-	var _LoginForm2 = _interopRequireDefault(_LoginForm);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var LoginPage = function (_React$Component) {
-	  _inherits(LoginPage, _React$Component);
-
-	  /**
-	   * Class constructor.
-	   */
-	  function LoginPage(props, context) {
-	    _classCallCheck(this, LoginPage);
-
-	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props, context));
-
-	    var storedMessage = localStorage.getItem('successMessage');
-	    var successMessage = '';
-
-	    if (storedMessage) {
-	      successMessage = storedMessage;
-	      localStorage.removeItem('successMessage');
-	    }
-
-	    // set the initial component state
-	    _this.state = {
-	      errors: {},
-	      successMessage: successMessage,
-	      user: {
-	        name: '',
-	        password: ''
-	      }
-	    };
-
-	    _this.processForm = _this.processForm.bind(_this);
-	    _this.changeUser = _this.changeUser.bind(_this);
-	    return _this;
-	  }
-
-	  /**
-	   * Process the form.
-	   *
-	   * @param {object} event - the JavaScript event object
-	   */
-
-
-	  _createClass(LoginPage, [{
-	    key: 'processForm',
-	    value: function processForm(event) {
-	      var _this2 = this;
-
-	      // prevent default action. in this case, action is the form submission event
-	      event.preventDefault();
-
-	      // create a string for an HTTP body message
-	      var name = encodeURIComponent(this.state.user.name);
-	      var password = encodeURIComponent(this.state.user.password);
-	      var formData = 'email=' + name + '&password=' + password;
-
-	      // create an AJAX request
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/auth/login');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          // success
-
-	          // change the component-container state
-	          _this2.setState({
-	            errors: {}
-	          });
-	          //console.log("loginpage " + xhr.response.token);
-	          // save the token
-	          _Auth2.default.authenticateUser(xhr.response.token);
-
-	          // change the current URL to /
-	          _this2.context.router.replace('/');
-	        } else {
-	          // failure
-
-	          // change the component state
-	          var errors = xhr.response.errors ? xhr.response.errors : {};
-	          errors.summary = xhr.response.message;
-
-	          _this2.setState({
-	            errors: errors
-	          });
-	        }
-	      });
-	      xhr.send(formData);
-	    }
-
-	    /**
-	     * Change the user object.
-	     *
-	     * @param {object} event - the JavaScript event object
-	     */
-
-	  }, {
-	    key: 'changeUser',
-	    value: function changeUser(event) {
-	      var field = event.target.name;
-	      var user = this.state.user;
-	      user[field] = event.target.value;
-
-	      this.setState({
-	        user: user
-	      });
-	    }
-
-	    /**
-	     * Render the component.
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_LoginForm2.default, {
-	        onSubmit: this.processForm,
-	        onChange: this.changeUser,
-	        errors: this.state.errors,
-	        successMessage: this.state.successMessage,
-	        user: this.state.user
-	      });
-	    }
-	  }]);
-
-	  return LoginPage;
-	}(_react2.default.Component);
-
-	LoginPage.contextTypes = {
-	  router: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = LoginPage;
-
-/***/ }),
-/* 460 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(339);
-
-	var _Card = __webpack_require__(400);
-
-	var _RaisedButton = __webpack_require__(461);
-
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
-
-	var _TextField = __webpack_require__(463);
-
-	var _TextField2 = _interopRequireDefault(_TextField);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var LoginForm = function LoginForm(_ref) {
-	  var onSubmit = _ref.onSubmit,
-	      onChange = _ref.onChange,
-	      errors = _ref.errors,
-	      successMessage = _ref.successMessage,
-	      user = _ref.user;
-	  return _react2.default.createElement(
-	    _Card.Card,
-	    { className: 'container' },
-	    _react2.default.createElement(
-	      'form',
-	      { action: '/', onSubmit: onSubmit },
-	      _react2.default.createElement(
-	        'h2',
-	        { className: 'card-heading' },
-	        'Login'
-	      ),
-	      successMessage && _react2.default.createElement(
-	        'p',
-	        { className: 'success-message' },
-	        successMessage
-	      ),
-	      errors.summary && _react2.default.createElement(
-	        'p',
-	        { className: 'error-message' },
-	        errors.summary
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: 'Name',
-	          name: 'name',
-	          errorText: errors.name,
-	          onChange: onChange,
-	          value: user.name
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'field-line' },
-	        _react2.default.createElement(_TextField2.default, {
-	          floatingLabelText: 'Password',
-	          type: 'password',
-	          name: 'password',
-	          onChange: onChange,
-	          errorText: errors.password,
-	          value: user.password
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'button-line' },
-	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Log in', primary: true })
-	      ),
-	      _react2.default.createElement(
-	        _Card.CardText,
-	        null,
-	        'Don\'t have an account? ',
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signup' },
-	          'Create one'
-	        ),
-	        '.'
-	      )
-	    )
-	  );
-	};
-
-	LoginForm.propTypes = {
-	  onSubmit: _react.PropTypes.func.isRequired,
-	  onChange: _react.PropTypes.func.isRequired,
-	  errors: _react.PropTypes.object.isRequired,
-	  successMessage: _react.PropTypes.string.isRequired,
-	  user: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = LoginForm;
-
-/***/ }),
-/* 461 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 	exports.default = undefined;
 
-	var _RaisedButton = __webpack_require__(462);
+	var _RaisedButton = __webpack_require__(458);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -41648,7 +41215,7 @@
 	exports.default = _RaisedButton2.default;
 
 /***/ }),
-/* 462 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42126,6 +41693,457 @@
 	} : void 0;
 	exports.default = RaisedButton;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 459 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Dashboard = __webpack_require__(460);
+
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DashboardPage = function (_React$Component) {
+	  _inherits(DashboardPage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function DashboardPage(props) {
+	    _classCallCheck(this, DashboardPage);
+
+	    var _this = _possibleConstructorReturn(this, (DashboardPage.__proto__ || Object.getPrototypeOf(DashboardPage)).call(this, props));
+
+	    _this.state = {
+	      data: []
+	    };
+	    return _this;
+	  }
+
+	  /**
+	   * This method will be executed after initial rendering.
+	   */
+
+
+	  _createClass(DashboardPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('get', '/api/dashboard');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          _this2.setState({
+	            data: xhr.response
+	          });
+	        }
+	      });
+	      xhr.send();
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_Dashboard2.default, { data: this.state.data });
+	    }
+	  }]);
+
+	  return DashboardPage;
+	}(_react2.default.Component);
+
+	exports.default = DashboardPage;
+
+/***/ }),
+/* 460 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _RaisedButton = __webpack_require__(457);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Dashboard = function (_React$Component) {
+	    _inherits(Dashboard, _React$Component);
+
+	    function Dashboard() {
+	        _classCallCheck(this, Dashboard);
+
+	        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+	    }
+
+	    _createClass(Dashboard, [{
+	        key: 'render',
+	        value: function render() {
+	            var data = this.props.data.map(function (data) {
+	                return _react2.default.createElement(
+	                    _Card.Card,
+	                    { className: 'userRow', key: data.user_id },
+	                    _react2.default.createElement(_Card.CardTitle, { title: data.name }),
+	                    _react2.default.createElement(
+	                        _Card.CardText,
+	                        { style: { fontSize: '16px', color: 'green' } },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/gallery/' + data.user_id },
+	                            'Images:',
+	                            data.no_of_images
+	                        )
+	                    )
+	                );
+	            });
+
+	            var token = _Auth2.default.getToken();
+	            var hasura_id = token.split(' ')[1];
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'dashboardContainer' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/addimage/' + hasura_id },
+	                    'Add a new image'
+	                ),
+	                data
+	            );
+	        }
+	    }]);
+
+	    return Dashboard;
+	}(_react2.default.Component);
+
+	exports.default = Dashboard;
+
+/***/ }),
+/* 461 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _LoginForm = __webpack_require__(462);
+
+	var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LoginPage = function (_React$Component) {
+	  _inherits(LoginPage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function LoginPage(props, context) {
+	    _classCallCheck(this, LoginPage);
+
+	    var _this = _possibleConstructorReturn(this, (LoginPage.__proto__ || Object.getPrototypeOf(LoginPage)).call(this, props, context));
+
+	    var storedMessage = localStorage.getItem('successMessage');
+	    var successMessage = '';
+
+	    if (storedMessage) {
+	      successMessage = storedMessage;
+	      localStorage.removeItem('successMessage');
+	    }
+
+	    // set the initial component state
+	    _this.state = {
+	      errors: {},
+	      successMessage: successMessage,
+	      user: {
+	        name: '',
+	        password: ''
+	      }
+	    };
+
+	    _this.processForm = _this.processForm.bind(_this);
+	    _this.changeUser = _this.changeUser.bind(_this);
+	    return _this;
+	  }
+
+	  /**
+	   * Process the form.
+	   *
+	   * @param {object} event - the JavaScript event object
+	   */
+
+
+	  _createClass(LoginPage, [{
+	    key: 'processForm',
+	    value: function processForm(event) {
+	      var _this2 = this;
+
+	      // prevent default action. in this case, action is the form submission event
+	      event.preventDefault();
+
+	      // create a string for an HTTP body message
+	      var name = encodeURIComponent(this.state.user.name);
+	      var password = encodeURIComponent(this.state.user.password);
+	      var formData = 'email=' + name + '&password=' + password;
+
+	      // create an AJAX request
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/auth/login');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          // success
+
+	          // change the component-container state
+	          _this2.setState({
+	            errors: {}
+	          });
+	          //console.log("loginpage " + xhr.response.token);
+	          // save the token
+	          _Auth2.default.authenticateUser(xhr.response.token);
+
+	          // change the current URL to /
+	          _this2.context.router.replace('/');
+	        } else {
+	          // failure
+
+	          // change the component state
+	          var errors = xhr.response.errors ? xhr.response.errors : {};
+	          errors.summary = xhr.response.message;
+
+	          _this2.setState({
+	            errors: errors
+	          });
+	        }
+	      });
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Change the user object.
+	     *
+	     * @param {object} event - the JavaScript event object
+	     */
+
+	  }, {
+	    key: 'changeUser',
+	    value: function changeUser(event) {
+	      var field = event.target.name;
+	      var user = this.state.user;
+	      user[field] = event.target.value;
+
+	      this.setState({
+	        user: user
+	      });
+	    }
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(_LoginForm2.default, {
+	        onSubmit: this.processForm,
+	        onChange: this.changeUser,
+	        errors: this.state.errors,
+	        successMessage: this.state.successMessage,
+	        user: this.state.user
+	      });
+	    }
+	  }]);
+
+	  return LoginPage;
+	}(_react2.default.Component);
+
+	LoginPage.contextTypes = {
+	  router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = LoginPage;
+
+/***/ }),
+/* 462 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(457);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _TextField = __webpack_require__(463);
+
+	var _TextField2 = _interopRequireDefault(_TextField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var LoginForm = function LoginForm(_ref) {
+	  var onSubmit = _ref.onSubmit,
+	      onChange = _ref.onChange,
+	      errors = _ref.errors,
+	      successMessage = _ref.successMessage,
+	      user = _ref.user;
+	  return _react2.default.createElement(
+	    _Card.Card,
+	    { className: 'container' },
+	    _react2.default.createElement(
+	      'form',
+	      { action: '/', onSubmit: onSubmit },
+	      _react2.default.createElement(
+	        'h2',
+	        { className: 'card-heading' },
+	        'Login'
+	      ),
+	      successMessage && _react2.default.createElement(
+	        'p',
+	        { className: 'success-message' },
+	        successMessage
+	      ),
+	      errors.summary && _react2.default.createElement(
+	        'p',
+	        { className: 'error-message' },
+	        errors.summary
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Name',
+	          name: 'name',
+	          errorText: errors.name,
+	          onChange: onChange,
+	          value: user.name
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'field-line' },
+	        _react2.default.createElement(_TextField2.default, {
+	          floatingLabelText: 'Password',
+	          type: 'password',
+	          name: 'password',
+	          onChange: onChange,
+	          errorText: errors.password,
+	          value: user.password
+	        })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'button-line' },
+	        _react2.default.createElement(_RaisedButton2.default, { type: 'submit', label: 'Log in', primary: true })
+	      ),
+	      _react2.default.createElement(
+	        _Card.CardText,
+	        null,
+	        'Don\'t have an account? ',
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/signup' },
+	          'Create one'
+	        ),
+	        '.'
+	      )
+	    )
+	  );
+	};
+
+	LoginForm.propTypes = {
+	  onSubmit: _react.PropTypes.func.isRequired,
+	  onChange: _react.PropTypes.func.isRequired,
+	  errors: _react.PropTypes.object.isRequired,
+	  successMessage: _react.PropTypes.string.isRequired,
+	  user: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = LoginForm;
 
 /***/ }),
 /* 463 */
@@ -43894,7 +43912,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -44273,7 +44291,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -44508,7 +44526,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -44614,7 +44632,7 @@
 
 	var _ViewImage2 = _interopRequireDefault(_ViewImage);
 
-	var _ImageTagEdit = __webpack_require__(482);
+	var _ImageTagEdit = __webpack_require__(484);
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 
@@ -44723,11 +44741,11 @@
 
 	var _reactRouter = __webpack_require__(339);
 
-	var _ViewTagPage = __webpack_require__(484);
+	var _ViewTagPage = __webpack_require__(482);
 
 	var _ViewTagPage2 = _interopRequireDefault(_ViewTagPage);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -44802,6 +44820,198 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Auth = __webpack_require__(398);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _Card = __webpack_require__(400);
+
+	var _ViewTag = __webpack_require__(483);
+
+	var _ViewTag2 = _interopRequireDefault(_ViewTag);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewTagPage = function (_React$Component) {
+	  _inherits(ViewTagPage, _React$Component);
+
+	  /**
+	   * Class constructor.
+	   */
+	  function ViewTagPage(props, context) {
+	    _classCallCheck(this, ViewTagPage);
+
+	    // set the initial component state
+	    var _this = _possibleConstructorReturn(this, (ViewTagPage.__proto__ || Object.getPrototypeOf(ViewTagPage)).call(this, props, context));
+
+	    _this.state = {
+	      tagged: []
+	    };
+	    return _this;
+	  }
+
+	  /*
+	    loading existing image data
+	    */
+
+	  _createClass(ViewTagPage, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      console.error("in will mount");
+	      var token = _Auth2.default.getToken();
+	      token = token.split(' ')[0];
+	      //const image_id = encodeURIComponent("38");
+	      var image_id = encodeURIComponent(this.props.image_id);
+	      var formData = 'image_id=' + image_id;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('post', '/api/getImageTags');
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+	      xhr.responseType = 'json';
+	      xhr.addEventListener('load', function () {
+	        if (xhr.status === 200) {
+	          var data = xhr.response;
+	          _this2.setState({
+	            tagged: data
+	          });
+	        }
+	      });
+	      //      console.error(formData);
+	      xhr.send(formData);
+	    }
+
+	    /**
+	     * Process the form.
+	     *
+	     * @param {object} event - the JavaScript event object
+	     */
+
+	    /**
+	     * Render the component.
+	     */
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Card.Card,
+	        { name: 'container' },
+	        _react2.default.createElement(_ViewTag2.default, {
+	          data: this.state.tagged
+	        })
+	      );
+	    }
+	  }]);
+
+	  return ViewTagPage;
+	}(_react2.default.Component);
+
+	ViewTagPage.contextTypes = {
+	  router: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = ViewTagPage;
+
+/***/ }),
+/* 483 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(339);
+
+	var _Card = __webpack_require__(400);
+
+	var _RaisedButton = __webpack_require__(457);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ViewTag = function (_React$Component) {
+	    _inherits(ViewTag, _React$Component);
+
+	    function ViewTag() {
+	        _classCallCheck(this, ViewTag);
+
+	        return _possibleConstructorReturn(this, (ViewTag.__proto__ || Object.getPrototypeOf(ViewTag)).apply(this, arguments));
+	    }
+
+	    _createClass(ViewTag, [{
+	        key: 'render',
+	        value: function render() {
+	            var handleClick = this.props.onSubmit;
+	            var data = this.props.data.map(function (data, i) {
+	                return _react2.default.createElement(
+	                    _RaisedButton2.default,
+	                    { key: i },
+	                    data.tag_name
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                _Card.Card,
+	                { className: 'container' },
+	                _react2.default.createElement(
+	                    _Card.CardText,
+	                    null,
+	                    _react2.default.createElement(
+	                        _RaisedButton2.default,
+	                        { primary: true },
+	                        'Tags:'
+	                    ),
+	                    data
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ViewTag;
+	}(_react2.default.Component);
+
+	exports.default = ViewTag;
+
+/***/ }),
+/* 484 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
@@ -44817,7 +45027,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _ImageTagEditForm = __webpack_require__(483);
+	var _ImageTagEditForm = __webpack_require__(485);
 
 	var _ImageTagEditForm2 = _interopRequireDefault(_ImageTagEditForm);
 
@@ -45112,7 +45322,7 @@
 	exports.default = ImageTagEdit;
 
 /***/ }),
-/* 483 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45131,7 +45341,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -45178,198 +45388,6 @@
 	}(_react2.default.Component);
 
 	exports.default = ImageTagAdd;
-
-/***/ }),
-/* 484 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Auth = __webpack_require__(398);
-
-	var _Auth2 = _interopRequireDefault(_Auth);
-
-	var _Card = __webpack_require__(400);
-
-	var _ViewTag = __webpack_require__(485);
-
-	var _ViewTag2 = _interopRequireDefault(_ViewTag);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ViewTagPage = function (_React$Component) {
-	  _inherits(ViewTagPage, _React$Component);
-
-	  /**
-	   * Class constructor.
-	   */
-	  function ViewTagPage(props, context) {
-	    _classCallCheck(this, ViewTagPage);
-
-	    // set the initial component state
-	    var _this = _possibleConstructorReturn(this, (ViewTagPage.__proto__ || Object.getPrototypeOf(ViewTagPage)).call(this, props, context));
-
-	    _this.state = {
-	      tagged: []
-	    };
-	    return _this;
-	  }
-
-	  /*
-	    loading existing image data
-	    */
-
-	  _createClass(ViewTagPage, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      console.error("in will mount");
-	      var token = _Auth2.default.getToken();
-	      token = token.split(' ')[0];
-	      //const image_id = encodeURIComponent("38");
-	      var image_id = encodeURIComponent(this.props.image_id);
-	      var formData = 'image_id=' + image_id;
-
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('post', '/api/getImageTags');
-	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	      xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-	      xhr.responseType = 'json';
-	      xhr.addEventListener('load', function () {
-	        if (xhr.status === 200) {
-	          var data = xhr.response;
-	          _this2.setState({
-	            tagged: data
-	          });
-	        }
-	      });
-	      //      console.error(formData);
-	      xhr.send(formData);
-	    }
-
-	    /**
-	     * Process the form.
-	     *
-	     * @param {object} event - the JavaScript event object
-	     */
-
-	    /**
-	     * Render the component.
-	     */
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _Card.Card,
-	        { name: 'container' },
-	        _react2.default.createElement(_ViewTag2.default, {
-	          data: this.state.tagged
-	        })
-	      );
-	    }
-	  }]);
-
-	  return ViewTagPage;
-	}(_react2.default.Component);
-
-	ViewTagPage.contextTypes = {
-	  router: _react.PropTypes.object.isRequired
-	};
-
-	exports.default = ViewTagPage;
-
-/***/ }),
-/* 485 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(339);
-
-	var _Card = __webpack_require__(400);
-
-	var _RaisedButton = __webpack_require__(461);
-
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ViewTag = function (_React$Component) {
-	    _inherits(ViewTag, _React$Component);
-
-	    function ViewTag() {
-	        _classCallCheck(this, ViewTag);
-
-	        return _possibleConstructorReturn(this, (ViewTag.__proto__ || Object.getPrototypeOf(ViewTag)).apply(this, arguments));
-	    }
-
-	    _createClass(ViewTag, [{
-	        key: 'render',
-	        value: function render() {
-	            var handleClick = this.props.onSubmit;
-	            var data = this.props.data.map(function (data, i) {
-	                return _react2.default.createElement(
-	                    _RaisedButton2.default,
-	                    { key: i },
-	                    data.tag_name
-	                );
-	            });
-
-	            return _react2.default.createElement(
-	                _Card.Card,
-	                { className: 'container' },
-	                _react2.default.createElement(
-	                    _Card.CardText,
-	                    null,
-	                    _react2.default.createElement(
-	                        _RaisedButton2.default,
-	                        { primary: true },
-	                        'Tags:'
-	                    ),
-	                    data
-	                )
-	            );
-	        }
-	    }]);
-
-	    return ViewTag;
-	}(_react2.default.Component);
-
-	exports.default = ViewTag;
 
 /***/ }),
 /* 486 */
@@ -45587,7 +45605,7 @@
 
 	var _Card = __webpack_require__(400);
 
-	var _RaisedButton = __webpack_require__(461);
+	var _RaisedButton = __webpack_require__(457);
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
@@ -45595,7 +45613,7 @@
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
-	var _ImageTagEdit = __webpack_require__(482);
+	var _ImageTagEdit = __webpack_require__(484);
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 
@@ -45696,7 +45714,7 @@
 
 	var _EditImage2 = _interopRequireDefault(_EditImage);
 
-	var _ImageTagEdit = __webpack_require__(482);
+	var _ImageTagEdit = __webpack_require__(484);
 
 	var _ImageTagEdit2 = _interopRequireDefault(_ImageTagEdit);
 

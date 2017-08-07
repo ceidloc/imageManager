@@ -41,6 +41,14 @@ h2 {
   clear: both;
 }
 
+
+.top-bar-title {
+
+    text-align: center;
+    font-size: 1.8em;
+}
+
+
 .top-bar-left {
   float: left;
   font-size: 1.5em;
@@ -99,6 +107,15 @@ h2 {
   width: 900px;
   background-color: #FFCC5C;
 }
+
+
+.homePageImage {
+  margin: 0 auto;
+  text-align: center;
+  width: 350px;
+  background-color: #88D8B0;
+}
+
 
 .card-heading {
   padding: 16px;

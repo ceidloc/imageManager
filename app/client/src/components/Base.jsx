@@ -7,6 +7,9 @@ const Base = ({ children }) => (
 
   <div>
     <div className="top-bar">
+      <div className="top-bar-title">
+        <IndexLink to="/">Image Manager</IndexLink>
+      </div>
       <div className="top-bar-left">
         <IndexLink to="/">Home</IndexLink>
       </div>
