@@ -43689,12 +43689,10 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      console.log("logoutpage");
 	      // prevent default action. in this case, action is the form submission event
 
 	      var token = _Auth2.default.getToken();
 	      token = token.split(' ')[0];
-	      console.log("dash" + token);
 
 	      // create an AJAX request
 	      var xhr = new XMLHttpRequest();
@@ -44769,7 +44767,6 @@
 	    _createClass(ViewImage, [{
 	        key: 'render',
 	        value: function render() {
-	            console.error(this.props.data);
 	            var token = _Auth2.default.getToken();
 	            var hasura_id = token.split(' ')[1];
 	            return _react2.default.createElement(
@@ -44874,7 +44871,6 @@
 	    value: function componentWillMount() {
 	      var _this2 = this;
 
-	      console.error("in will mount");
 	      var token = _Auth2.default.getToken();
 	      token = token.split(' ')[0];
 	      //const image_id = encodeURIComponent("38");
@@ -45072,7 +45068,6 @@
 	        value: function componentWillMount() {
 	            var _this2 = this;
 
-	            console.error("in will mount");
 	            var token = _Auth2.default.getToken();
 	            token = token.split(' ')[0];
 	            //const image_id = encodeURIComponent("38");
@@ -45117,7 +45112,6 @@
 	        value: function componentDidMount() {
 	            var _this3 = this;
 
-	            console.error("in did mount");
 	            var token = _Auth2.default.getToken();
 	            token = token.split(' ')[0];
 	            //const image_id = encodeURIComponent("38");
@@ -45215,7 +45209,6 @@
 
 	                    var errors = xhr.response.errors ? xhr.response.errors : {};
 	                    errors.summary = xhr.response.message;
-	                    console.error("in add tag ERRORS: " + errors);
 	                }
 	            });
 	            xhr.send(formData);
@@ -45245,7 +45238,6 @@
 	            xhr.addEventListener('load', function () {
 	                if (xhr.status === 200) {
 	                    // success
-	                    console.error("in delete tag: " + xhr.response);
 	                    // change the component-container state
 	                    var newTag = { "tag_name": tag_name };
 	                    var untagged = _this5.state.untagged;
@@ -45274,7 +45266,6 @@
 
 	                    var errors = xhr.response.errors ? xhr.response.errors : {};
 	                    errors.summary = xhr.response.message;
-	                    console.error("in add tag ERRORS: " + errors);
 	                }
 	            });
 	            xhr.send(formData);
@@ -45474,8 +45465,6 @@
 	      xhr.addEventListener('load', function () {
 	        if (xhr.status === 200) {
 	          var data = xhr.response;
-	          console.error("xhr.response:");
-	          console.error(data);
 	          var image = _this2.state.image;
 	          image.url = data.url;
 	          image.caption = data.caption;
@@ -45531,7 +45520,6 @@
 
 	          // set a message
 	          // make a redirect
-	          console.error("fuewifn: " + _this3.state.image.user_id);
 	          _this3.context.router.replace('/gallery/' + _this3.state.image.user_id);
 	        } else {
 	          // failure
@@ -45760,8 +45748,6 @@
 	            xhr.addEventListener('load', function () {
 	                if (xhr.status === 200) {
 	                    var data = xhr.response;
-	                    console.error("xhr.response:");
-	                    console.error(data);
 	                }
 	            });
 	            //      console.error(formData);
