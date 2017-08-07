@@ -21,7 +21,7 @@ module.exports = new PassportLocalStrategy({
   };
 
   var headers = {'Content-Type': 'application/json'};
-  var url = 'http://auth.c101.hasura.me/signup';
+  var url = 'http://auth.imagemanager.hasura.me/signup';
   var options = {
     method: 'POST',
     headers,
@@ -49,7 +49,7 @@ module.exports = new PassportLocalStrategy({
 
         var options = {
             method: 'POST',
-            uri: 'http://data.c101.hasura.me/v1/query',
+            uri: 'http://data.imagemanager.hasura.me/v1/query',
             headers,
             body: {
               "type":"insert",

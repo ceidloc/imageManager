@@ -9,7 +9,7 @@ router.get('/logout', (req, res) => {
 
   console.log(req.headers);
   app.get('/logout', function(req, res) {
-  var url = 'http://auth.nonstop61.hasura-app.io/user/logout';
+  var url = 'http://auth.imagemanager.hasura.me/logout';
   var options = {
     method: 'POST',
     headers

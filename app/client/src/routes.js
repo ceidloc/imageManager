@@ -68,7 +68,7 @@ const routes = {
 
         Auth.deauthenticateUser();
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://auth.c101.hasura.me/user/logout', true);
+        xhr.open('GET', 'http://app.imagemanager.hasura.me/user/logout', true);
         xhr.setRequestHeader('Content-type', 'application/json');
         xhr.setRequestHeader('Authorization', `Bearer ${token}`);
         xhr.responseType = 'json';
