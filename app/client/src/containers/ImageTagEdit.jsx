@@ -27,7 +27,6 @@ class ImageTagEdit extends React.Component {
      */
 
     componentWillMount() {
-        console.error("in will mount");
       var token = Auth.getToken();
       token = token.split(' ')[0];
       //const image_id = encodeURIComponent("38");
@@ -70,7 +69,6 @@ class ImageTagEdit extends React.Component {
   }
 
     componentDidMount() {
-        console.error("in did mount");
       var token = Auth.getToken();
       token = token.split(' ')[0];
       //const image_id = encodeURIComponent("38");
@@ -165,7 +163,6 @@ class ImageTagEdit extends React.Component {
 
         const errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
-          console.error("in add tag ERRORS: "+ errors );
       }
     });
     xhr.send(formData);
@@ -193,7 +190,6 @@ class ImageTagEdit extends React.Component {
       xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         // success
-          console.error("in delete tag: "+ xhr.response );
           // change the component-container state
           var newTag = {"tag_name":tag_name};
           var untagged = this.state.untagged;
@@ -223,7 +219,6 @@ class ImageTagEdit extends React.Component {
 
         const errors = xhr.response.errors ? xhr.response.errors : {};
           errors.summary = xhr.response.message;
-          console.error("in add tag ERRORS: "+ errors );
       }
     });
     xhr.send(formData);

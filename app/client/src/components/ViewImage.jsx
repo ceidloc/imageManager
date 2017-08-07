@@ -8,7 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 class ViewImage extends React.Component {        
     
     render() {
-        console.error(this.props.data);
         var token = Auth.getToken();
         var hasura_id  = token.split(' ')[1];
         return (

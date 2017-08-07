@@ -47,8 +47,6 @@ class EditImagePage extends React.Component {
     xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
             var data = xhr.response;
-            console.error("xhr.response:");
-            console.error(data);
             var image = this.state.image;
             image.url = data.url;
             image.caption = data.caption;
@@ -101,7 +99,6 @@ class EditImagePage extends React.Component {
 
           // set a message
           // make a redirect
-          console.error("fuewifn: "+this.state.image.user_id );
           this.context.router.replace('/gallery/'+this.state.image.user_id);
       } else {
         // failure

@@ -22,8 +22,6 @@ class DeleteImage extends React.Component {
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
                 var data = xhr.response;
-                console.error("xhr.response:");
-                console.error(data);            
         }
     });
 //      console.error(formData);

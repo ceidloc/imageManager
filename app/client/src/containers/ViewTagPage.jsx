@@ -23,7 +23,6 @@ class ViewTagPage extends React.Component {
      */
 
     componentWillMount() {
-        console.error("in will mount");
       var token = Auth.getToken();
       token = token.split(' ')[0];
       //const image_id = encodeURIComponent("38");

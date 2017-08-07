@@ -17,12 +17,10 @@ class LogoutPage extends React.Component {
    * @param {object} event - the JavaScript event object
    */
   componentDidMount() {
-    console.log("logoutpage");
     // prevent default action. in this case, action is the form submission event
 
     var token = Auth.getToken();
     token = token.split(' ')[0];
-    console.log("dash"+token);
 
     // create an AJAX request
     const xhr = new XMLHttpRequest();
