@@ -14,7 +14,7 @@ router.get('/dashboard', (req, res) => {
     headers['X-Hasura-Role'] = req.headers['x-hasura-role'];
     headers['X-Hasura-User-Id'] = req.headers['x-hasura-user-id'];
 
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -62,7 +62,7 @@ router.post('/gallery', (req, res) => {
     var user_id = parseInt(req.body.user_id);
     //var user_id =38 ;
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -115,7 +115,7 @@ router.post('/filterByTag', (req, res) => {
     var tag_name = req.body.tag_name;
     //var user_id =38 ;
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -188,7 +188,7 @@ router.post('/addimage', (req, res) => {
                 //var user_id =38 ;
             //console.error(req.body);
     
-            var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+            var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
             var options = {
 	        method: 'POST',
                 headers,
@@ -252,7 +252,7 @@ router.post('/viewimage', (req, res) => {
     var image_id = parseInt(req.body.image_id);
     //var user_id =38 ;
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -321,7 +321,7 @@ router.post('/editimage', (req, res) => {
             });
             
         }else {
-            var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+            var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
             var options = {
 	        method: 'POST',
                 headers,
@@ -393,7 +393,7 @@ router.post('/deleteimage', (req, res) => {
     //var user_id =38 ;
     //console.error(req.body);
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
         headers,
@@ -448,7 +448,7 @@ router.post('/getImageTags', (req, res) => {
     var image_id = parseInt(req.body.image_id);
     //var user_id =38 ;
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -501,7 +501,7 @@ router.post('/getAllTags', (req, res) => {
     var image_id = parseInt(req.body.image_id);
     //var user_id =38 ;
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
 	body: JSON.stringify({
@@ -555,7 +555,7 @@ router.post('/addImageTag', (req, res) => {
     //var user_id =38 ;
     //console.error(req.body);
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
         headers,
@@ -616,7 +616,7 @@ router.post('/deleteImageTag', (req, res) => {
     //var user_id =38 ;
     //console.error(req.body);
     
-    var schemaFetchUrl = 'http://data.imagermanager.hasura.me/v1/query';
+    var schemaFetchUrl = 'http://data.imagemanager.hasura.me/v1/query';
     var options = {
 	method: 'POST',
         headers,
